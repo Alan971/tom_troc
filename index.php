@@ -13,7 +13,8 @@ try {
     switch ($action) {
         // Pages accessibles à tous.
         case 'home':
-            
+            $bookController = new BookController();
+            $bookController->showHome();
             break;
         case 'library':
 
@@ -21,11 +22,22 @@ try {
         case 'singleBook':
 
             break;
+        
         case 'inscription':
 
             break;
-        case 'connecion':
+        // user access
+        case 'connectUser':
 
+            break;
+        case 'disconnectUser':
+
+                break;  
+        case 'Message' :
+            
+            break;
+        case 'myAccount' :
+            
             break;
         case 'profil':
 
@@ -35,9 +47,6 @@ try {
             break;
         case 'edition':
 
-            break;
-        case 'message':
-            
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");
