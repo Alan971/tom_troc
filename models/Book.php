@@ -11,6 +11,7 @@ class Book extends AbstractEntity {
     private string $comment = "";
     private string $image = "";
     private bool $exchange;
+    private string $pseudo = "";
 
     /**
      * Setter pour l'id du livre. 
@@ -119,7 +120,7 @@ class Book extends AbstractEntity {
     {
         return $this->image;
     }
-/**
+    /**
      * Setter pour l'echange du livre. 
      * @param int $exchange
      */
@@ -136,5 +137,23 @@ class Book extends AbstractEntity {
     {
         return $this->exchange;
     }
+
+    /**
+     * Getter pour le pseudo du vendeur'.
+     * @return string
+     */
+    public function getPseudo() :string
+    {
+        return $this->pseudo;
+    }
+    /**
+     * Setter pour le pseudo du vendeur. 
+     * @param string
+     */
+    public function setPseudo(string $pseudo) : void 
+    {
+        $this->pseudo = $pseudo;
+    }
+
 
 }

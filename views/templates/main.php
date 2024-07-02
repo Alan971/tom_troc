@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tom Troc</title>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/stylemain.css">
+    <link rel="stylesheet" href="./css/homestyle.css">
 </head>
 
 <body>

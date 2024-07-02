@@ -17,7 +17,8 @@ try {
             $bookController->showHome();
             break;
         case 'library':
-
+            $bookController = new BookController();
+            $bookController->showLibrary();
             break;
         case 'singleBook':
 

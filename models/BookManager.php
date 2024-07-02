@@ -39,7 +39,7 @@ public function getBookById($id) : ?Book {
 
 public function getAllBooks(?string $order) : ?array {
 
-    $sql = "SELECT * FROM books AS b ORDER BY b.id " .$order;
+    $sql = "SELECT b.id, b.id_user, b.title, b.author, b.image, b.comment, b.exchange, u.pseudo FROM books b RIGHT JOIN users u ON b.id_user = u.id_user ORDER BY b.id " .$order;
     $result = $this->db->query($sql);
     $bookList = Null;
     while ($book = $result->fetch()) {
