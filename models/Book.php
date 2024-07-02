@@ -1,12 +1,15 @@
 <?php
+/**
+ * Entité Book, un livre est défini par les champs
+ * id, id_user, title, comment, image, exchange
+ */
+class Book extends AbstractEntity {
 
-class Book {
-    private int $id;
-    private int $idUser;
+    private int $id_user;
     private string $title = "";
     private string $author = "";
     private string $comment = "";
-    private string $pathImage = "";
+    private string $image = "";
     private bool $exchange;
 
     /**
@@ -15,7 +18,7 @@ class Book {
      */
     public function setId(int $id) : void 
     {
-        $this->idUser = $id;
+        $this->id_user = $id;
     }
 
     /**
@@ -29,20 +32,20 @@ class Book {
 
     /**
      * Setter pour l'id de l'utilisateur. 
-     * @param int $idUser
+     * @param int $id_user
      */
-    public function setIdUser(int $idUser) : void 
+    public function setid_user(int $id_user) : void 
     {
-        $this->idUser = $idUser;
+        $this->id_user = $id_user;
     }
 
     /**
      * Getter pour l'id de l'utilisateur.
      * @return int
      */
-    public function getIdUser() : int 
+    public function getid_user() : int 
     {
-        return $this->idUser;
+        return $this->id_user;
     }
 
     /**
@@ -103,18 +106,18 @@ class Book {
      * Setter pour l'auteur.
      * @param string $comment
      */
-    public function setPathImage(string $pathImage) : void 
+    public function setImage(string $image) : void 
     {
-        $this->pathImage = $pathImage;
+        $this->image = $image;
     }
 
         /**
      * Getter pour l'auteur.
      * @return string
      */
-    public function getPathImage() : string 
+    public function getImage() : string 
     {
-        return $this->pathImage;
+        return $this->image;
     }
 /**
      * Setter pour l'echange du livre. 
