@@ -28,7 +28,7 @@ public function getAllBookByUser($id_user) : array {
 
 public function getBookById($id) : ?Book {
 
-    $sql = "SELECT * FROM books WHERE id = :id";
+    $sql = "SELECT b.id, b.id_user, b.title, b.author, b.image, b.comment, b.exchange, u.pseudo FROM books b RIGHT JOIN users u ON id =:id GROUP BY b.id";
     $result = $this->db->query($sql, ['id' => $id]);
     $book = $result->fetch();
     if ($book) {

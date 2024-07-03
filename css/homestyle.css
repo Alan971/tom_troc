@@ -159,13 +159,16 @@
     flex-wrap: wrap;
     padding-bottom: 30px;
 }
+#lastBooks .Cards {
+    width: 80%;
+}
 .Card {
     width: 200px;
     height: 324px;
     display: flex;
     flex-direction: column;
     justify-content: left;
-    margin: 20px;
+    margin: 10px;
 }
 .Card img {
     height: 200px;
@@ -196,16 +199,19 @@
    min-height: 600px;
    display: flex;
    flex-direction: column;
-   align-items: center;
+   align-items:start;
+   margin-left: 250px;
+   margin-top: 100px;
 }
+
 #titleSearchLibrary {
     width: 70%;
     height: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 50px;
-    margin-top: 100px;
+    margin-left: 20px;
+    margin-bottom: 50px;
 }
 #titleSearchLibrary h2 {
     width: 50%;
@@ -221,4 +227,86 @@
 #titleSearchLibrary input {
     width: 70%;
     height: 48px;
+}
+/* page singleBook.php */
+#singleBook{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--backgroundColor);
+}
+#linkBack {
+    width: 75%;
+    margin-top: 20px;
+}
+#linkBack a {
+    font-size: 10px;
+    font-weight: 300;
+    color: #A6A6A6;
+}
+#singleBookDescription {
+    width: 100%;
+    background-color: var(--backgroundPaleColor);
+    display: flex;
+    flex-direction: row;
+}
+#singleBookDescription img{
+    width: 50%;
+}
+#description {
+    width: 50%;
+    padding: 70px;
+    padding-right: 100px;
+}
+#owner {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+}
+#owner img {
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+    margin-right: 10px;   
+}
+#owner span{
+    color: #292929;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+}
+#description a {
+    background-color: var(--defaultGreenColor);
+    border-radius: 15px;
+    color: var(--backgroundPaleColor) ;
+    display: block;
+    width: 100%;
+    height: 50px;
+    margin-top : 50px;
+    padding-top: 15px;
+    text-align: center;
+}
+#singleBook p {
+    font-family: Inter;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-align: left;
+}
+#singleBook span {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+}
+#detail1{
+    color: #A6A6A6;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
 }
