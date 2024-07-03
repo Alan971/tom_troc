@@ -10,12 +10,12 @@
         <?php
         foreach($books as $book){
              echo " 
-             <div class='Card'>
+             <a class='Card' href='index.php?action=singleBook&id=". $book->getId() . "'>
                 <img src=" . $book->getImage() . " alt=". $book->getTitle() .">
                 <h3>". $book->getTitle() ."</h3>
                 <h4>". $book->getAuthor() ."</h4>
                 <p class='author'>Vendu par : ". $book->getPseudo() ."</p>
-             </div>";
+             </a>";
         }  
         ?>
     </div>

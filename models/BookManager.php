@@ -32,7 +32,7 @@ public function getBookById($id) : ?Book {
     $result = $this->db->query($sql, ['id' => $id]);
     $book = $result->fetch();
     if ($book) {
-        return new book($book);
+        return new Book($book);
     }
     return null;
 }

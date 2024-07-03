@@ -13,23 +13,6 @@ class Book extends AbstractEntity {
     private bool $exchange;
     private string $pseudo = "";
 
-    /**
-     * Setter pour l'id du livre. 
-     * @param int $id
-     */
-    public function setId(int $id) : void 
-    {
-        $this->id_user = $id;
-    }
-
-    /**
-     * Getter pour l'id du livre.
-     * @return int
-     */
-    public function getId() : int 
-    {
-        return $this->id;
-    }
 
     /**
      * Setter pour l'id de l'utilisateur. 

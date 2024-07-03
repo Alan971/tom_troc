@@ -21,7 +21,8 @@ try {
             $bookController->showLibrary();
             break;
         case 'singleBook':
-
+            $bookController = new BookController();
+            $bookController->showSingleBook();
             break;
         
         case 'inscription':
