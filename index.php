@@ -24,27 +24,37 @@ try {
             $bookController = new BookController();
             $bookController->showSingleBook();
             break;
-        
+        // user access      
         case 'inscription':
-
+            $adminController = new AdminController();
+            $adminController->displayInscriptionForm();
             break;
-        // user access
-        case 'connectUser':
+        case 'connexion':
+            $adminController = new AdminController();
+            $adminController->displayConnectionForm();
+            break;
 
+        case 'connectUser':
+            $adminController = new AdminController();
+            $adminController->connectUser();
             break;
         case 'disconnectUser':
-
-                break;  
+            $adminController = new AdminController();
+            $adminController->disconnectUser();
+            break; 
+        case 'newUser' :
+            $adminController = new AdminController();
+            $adminController->createUser();
+            break;
+        case 'myAccount' :
+            $adminController = new AdminController();
+            $adminController->showMyAccount();
+            break;
         case 'Message' :
             
             break;
-        case 'myAccount' :
-            
-            break;
-        case 'profil':
 
-            break;
-        case 'publicProfil':
+        case 'profil':
 
             break;
         case 'edition':

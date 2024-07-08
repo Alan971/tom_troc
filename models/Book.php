@@ -5,7 +5,7 @@
  */
 class Book extends AbstractEntity {
 
-    private int $id_user;
+    private int $id_user = -1;
     private string $title = "";
     private string $author = "";
     private string $comment = "";
@@ -18,7 +18,7 @@ class Book extends AbstractEntity {
      * Setter pour l'id de l'utilisateur. 
      * @param int $id_user
      */
-    public function setid_user(int $id_user) : void 
+    public function setidUser(int $id_user) : void 
     {
         $this->id_user = $id_user;
     }
@@ -27,7 +27,7 @@ class Book extends AbstractEntity {
      * Getter pour l'id de l'utilisateur.
      * @return int
      */
-    public function getid_user() : int 
+    public function getidUser() : int 
     {
         return $this->id_user;
     }

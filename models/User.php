@@ -5,25 +5,27 @@
  */ 
 class User extends AbstractEntity 
 {
-    private string $login;
+    private string $email="";
     private string $password;
+    private string $pseudo="";
+    private string $icon="img/icon/defaulticon.png";
 
     /**
-     * Setter pour le login.
-     * @param string $login
+     * Setter pour le email.
+     * @param string $email
      */
-    public function setLogin(string $login) : void 
+    public function setEmail(string $email) : void 
     {
-        $this->login = $login;
+        $this->email = $email;
     }
 
     /**
-     * Getter pour le login.
+     * Getter pour le email.
      * @return string
      */
-    public function getLogin() : string 
+    public function getEmail() : string 
     {
-        return $this->login;
+        return $this->email;
     }
 
     /**
@@ -43,4 +45,41 @@ class User extends AbstractEntity
     {
         return $this->password;
     }
+    /**
+     * Setter pour le email.
+     * @param string $email
+     */
+    public function setPseudo(string $pseudo) : void 
+    {
+        $this->pseudo = $pseudo;
+    }
+
+    /**
+     * Getter pour le email.
+     * @return string
+     */
+    public function getPseudo() : string 
+    {
+        return $this->pseudo;
+    }
+    /**
+     * Setter pour le email.
+     * @param string $email
+     */
+    public function setIcon(string $icon) : void 
+    {
+        $this->icon = $icon;
+    }
+
+    /**
+     * Getter pour le email.
+     * @return string
+     */
+    public function getIcon() : string 
+    {
+        return $this->icon;
+    }
+
+
+
 }

@@ -1,6 +1,7 @@
 :root {
     --backgroundColor: #F5F3EF;
     --backgroundPaleColor : #FFFFFF;
+    --backgroundPaleGrey : #FAF9F7;
     --defaultGreenColor : #00AC66;
     --variant2GreenColor : #006D41;
     --variant3GreenColor : #00AC66;
@@ -9,6 +10,15 @@
     --h2Color: #292929;
     --hamzaColor: #A6A6A6;
 }
+/* Pour les boutons de couleur verte */
+.linkGreen {
+    background-color: var(--defaultGreenColor);
+    border-radius: 15px;
+    color: var(--backgroundPaleColor) ;
+    padding-top: 20px;
+    text-align: center;
+}
+
 #homePartOne{
     background-color: var(--backgroundColor);
     width: 100%;
@@ -22,13 +32,8 @@
     padding-bottom: 40px;
 }
 #homePartOne a, #lastBooks a {
-    background-color: var(--defaultGreenColor);
-    border-radius: 15px;
-    color: var(--backgroundPaleColor) ;
     width: 152px;
     height: 63px;
-    padding-top: 20px;
-    text-align: center;
 }
 #introductionText{
     width: 35%;
@@ -224,10 +229,33 @@
     flex-direction: row;
     justify-content: center;
 }
-#titleSearchLibrary input {
+#searchBar {
     width: 70%;
     height: 48px;
+    color : #A6A6A6;
+    border: 1px #A6A6A6 solid;
+    display: flex;
+    align-items: center;
 }
+#searchBar input {
+    border: 0px solid white;
+    width: 100%;
+    height: 100%;
+}
+#searchBar input:focus {
+    outline : none;
+}
+.headerRightNav p {
+    display: inline-block;
+    width: 10px;
+    height: auto;
+    background-color: black;
+    color: white;
+    font-size: 11px;
+    border-radius: 5px 5px;
+    padding-left: 2px;
+}
+
 /* page singleBook.php */
 #singleBook{
     width: 100%;
@@ -309,4 +337,67 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 19.36px;
+}
+
+/* User management */
+.inscription {
+    width: 100%;
+    display: flex;
+    flex-direction:row;
+    justify-content: right;
+    background-color: var(--backgroundPaleGrey);
+}
+.inscription img {
+    width: 50%;
+}
+.leftPanel{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+    padding-top: 120px;
+    padding-left: 12%;
+}
+.inscriptionForm{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 30px;
+}
+.inscriptionForm input {
+    width: 322px;
+    height: 50px;
+    border: none;
+    background-color: var(--backgroundPaleColor);
+    margin-bottom: 40px;
+    font-size: larger;
+}
+.inscriptionForm input:focus {
+    outline : none;
+}
+.inscriptionForm button {
+    width: 322px;
+    height: 60px;
+    margin-bottom: 20px;
+    border: 0px solid;
+    padding : 0;
+}
+.inscriptionForm button:hover {
+    font-weight: 700;
+}
+
+.changeChoice {
+    display: flex;
+    flex-direction: row;
+}
+.changeChoice a {
+    text-decoration: underline;
+}
+label{
+    color: var(--hamzaColor);
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    margin-bottom: 10px;
 }

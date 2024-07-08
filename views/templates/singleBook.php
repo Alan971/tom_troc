@@ -19,7 +19,7 @@
                 <img src="img/icon/icontest.png" alt="">
                 <span><?=$book->getpseudo()?></span>
             </div>
-            <a href="index.php?action=Message?id=<?=$book->getId()?>?id_user=<?=$book->getId_user()?>>Envoyer un message</a>
+            <a href="index.php?action=Message?id=<?=$book->getId()?>&id_user=<?=$book->getidUser()?>">Envoyer un message</a>
         </div>
     </div>
 </div>

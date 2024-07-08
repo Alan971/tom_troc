@@ -6,7 +6,7 @@
  *      $title string : le titre de la page.
  *      $content string : le contenu de la page. 
  */
-
+$action = Utils::request('action', '');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,8 +14,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tom Troc</title>
+    <link rel="shortcut icon" href="img/tomtroc/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/homestyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ga+Maamli&family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -33,21 +40,22 @@
             </svg>
             <h1>Tom Troc</h1>
             <nav class = "headerLeftNav" aria-roledescription="Navigateur du site">
-                <a href="index.php">Accueil</a>
-                <a href="index.php?action=apropos">Nos livres à l'échange</a>
+                <?= $action == ''  ? "<span>Accueil</span>" : "<a href='index.php'>Accueil</a>"; ?>
+                <?= $action == 'library' ? "<span>Nos livres à l'échange</span>" : "<a href='index.php?action=library'>Nos livres à l'échange</a>";?>
             </nav>
         </div>
         <div class="divHeaderRight">
             <nav class="headerRightNav" aria-roledescription="Navigation utilisateur">
-                <a href="index.php?action=Message">Messagerie</a>
-                <a href="index.php?action=myAccount">Mon compte</a>
+                <a href="index.php?action=Message"><i class="fa-regular fa-comment"></i>Messagerie</a>
+                <p>2</p>
+                <a href="index.php?action=myAccount"><i class="fa-regular fa-user"></i> Mon compte</a>
                 <?php 
                     // Si on est connecté, on affiche le bouton de déconnexion, sinon, on affiche le bouton de connexion : 
                     if (isset($_SESSION['user'])) {
                         echo '<a href="index.php?action=disconnectUser">Déconnexion</a>';
                     }
                     else {
-                        echo '<a href="index.php?action=connectUser">Connexion</a>';
+                        echo '<a href="index.php?action=connexion">Connexion</a>';
                     }
                     ?>
             </nav>

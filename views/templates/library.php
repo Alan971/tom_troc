@@ -1,9 +1,13 @@
 <div id="library">
     <div id="titleSearchLibrary">
         <h2>Nos livres à l'échange</h2>
-        <form action="">
+        <form action="index.php?action=library" method="POST">
             <label for="search" name="search"></label>
-            <input type="text" name="search" id="search" placeholder="Rechercher un livre">
+            <div id = "searchBar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" name="search" id="search" placeholder=" Rechercher un livre">
+            </div>
+            <input type="submit" hidden>
         </form>
     </div>
     <div class="Cards">
