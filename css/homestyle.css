@@ -112,14 +112,17 @@
 #homePartThree a {
     width: 20%;
     height: 63px;
-    text-align: center;
     padding-top: 20px;
+    margin-top: 20px;
+}
+.linkGreenBorder {
+    text-align: center;
     background-color: var(--backgroundColor);
     color: var(--defaultGreenColor);
     border-radius: 15px;
     border: 1px var(--defaultGreenColor) solid;
-    margin-top: 20px;
 }
+
 #homePartThree img {
     width: 100%;
     padding-top: 40px;
@@ -380,7 +383,6 @@
     width: 322px;
     height: 60px;
     margin-bottom: 20px;
-    border: 0px solid;
     padding : 0;
 }
 .inscriptionForm button:hover {
@@ -400,4 +402,139 @@ label{
     font-weight: 400;
     text-align: left;
     margin-bottom: 10px;
+}
+
+/* page My account */
+#myAccount {
+    width: 100%;
+    padding-top: 100px;
+    background-color: var(--backgroundColor);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#title {
+    width: 100%;
+    padding-left: 10%;
+    padding-bottom: 30px;
+}
+#placingPersonnalInfo {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#accountDetail, #personnalInfo, #myLibrary {
+    background-color: var(--backgroundPaleColor);
+    border-radius: 15px;
+    padding-top: 40px;
+}
+#accountDetail {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#accountDetail img {
+    margin-top: 20px;
+    width: 136px;
+    height: 136px;
+    border-radius: 50%;
+}
+#accountDetail a {
+    color: var(--hamzaColor);
+    text-decoration: underline;
+    font-size: 14px;
+    padding-top: 10px;
+}
+#pseudoName{
+    font-family: Playfair Display;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 70px;
+
+}
+#titleLibrary {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding-top: 40px;
+}
+.nbBooks {
+    text-align: center;  
+}
+
+#personnalInfo {
+    width: 48%;
+    padding-left: 100px;
+}
+#personnalInfo input {
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+#myLibrary {
+    width : 90%;
+    margin-top: 100px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+td {
+    border: none;
+}
+th {
+    width: 16%;
+    border-bottom: 1px solid var(--hamzaColor);
+    text-align: start;
+}
+#myLibrary img{
+    width: 80px;
+    height: 80px;
+
+}
+.flag1 {
+    background-color: var(--hamzaColor);
+    border: 1px solid var(--hamzaColor);
+}
+table {
+    border-spacing : 0;
+}
+td {
+    border: none;
+}
+.dispo {
+    width: 70px;
+    height: 20px;
+    border-radius: 30px;
+    color: var(--backgroundPaleColor);
+}
+.superGreen {
+    background-color: var(--defaultGreenColor);
+    width: 45%; 
+    text-align: center;
+}
+.red {
+    background-color: var(--tagColor);
+    width: 50%;
+}
+#supprBook {
+    padding: 5px;
+    color: var(--tagColor);
+    text-decoration: underline;
+}
+#modifyBook {
+    padding: 5px;
+    text-decoration: underline;
+}
+
+
+/* SVG style  */
+polygon{
+    stroke-linejoin: round;
+    stroke:black;
+    fill:none;
 }

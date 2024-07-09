@@ -40,7 +40,7 @@
         <li>Parcourez les livres disponibles chez d'autres membres.</li>
         <li>Proposez un échange et discutez avec d'autres pasionnés de lecture.</li>
     </ul>
-    <a href="index.php?action=library">Voir tous les livres</a>
+    <a class = "linkGreenBorder" href="index.php?action=library">Voir tous les livres</a>
     <img src="img/tomtroc/Mask group.png" alt="">
     <h2>Nos Valeurs</h2>
     <div id="valeurEtSigle">
