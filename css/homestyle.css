@@ -588,7 +588,10 @@ label{
     padding: 5px;
     text-decoration: underline;
 }
-
+#infoSave {
+    color: var(--tagColor);
+    font-size: 8px;
+}
 
 /* SVG style  */
 polygon{

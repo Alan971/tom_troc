@@ -53,7 +53,7 @@
                         <input type="text" value="<?=$me->getPseudo()?>" name="pseudo" id = "pseudo" required>
                         <button class="linkGreenBorder">Enregistrer</button>
                         <?if(isset($isvalid)) : ?>
-                            <p><?=$isvalid?></p>
+                            <p id="infoSave"><?=$isvalid?></p>
                         <?endif;?>
                     </div>
                 </form>
@@ -116,8 +116,8 @@
                         <span class = 'red dispo'>non dispo.</span>
                     <?endif;?>
                     <p>
-                        <a id="modifyBook" href="index.php?action=modifyBook?id=<?=$book->getId()?>">Editer</a>
-                        <a id="supprBook" href="index.php?action=supprBook?id=<?=$book->getId()?>">Supprimer</a>
+                        <a id="modifyBook" href="index.php?action=modifyBook&id=<?=$book->getId()?>">Editer</a>
+                        <a id="supprBook" href="index.php?action=supprBook&id=<?=$book->getId()?>">Supprimer</a>
                     </p>
                 <?endif;?>
                 </div>

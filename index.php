@@ -57,15 +57,19 @@ try {
             $adminController = new AdminController();
             $adminController->modifyAccount();        
             break;
-        case 'Message' :
-            
+        // administration des livres
+        case 'supprBook' : 
+            $bookController = new BookController();
+            $bookController->removeBook();
             break;
-
         case 'addBook':
 
             break;
         case 'edition':
 
+            break;
+        case 'Message' :
+            
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");
