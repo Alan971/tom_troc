@@ -9,7 +9,7 @@ class User extends AbstractEntity
     private string $password;
     private string $pseudo="";
     private string $icon="img/icon/defaulticon.png";
-
+    private string $creationDate="";
     /**
      * Setter pour le email.
      * @param string $email
@@ -63,16 +63,15 @@ class User extends AbstractEntity
         return $this->pseudo;
     }
     /**
-     * Setter pour le email.
-     * @param string $email
+     * Setter pour le icon.
+     * @param string $icon
      */
     public function setIcon(string $icon) : void 
     {
         $this->icon = $icon;
     }
-
     /**
-     * Getter pour le email.
+     * Getter pour le icon.
      * @return string
      */
     public function getIcon() : string 
@@ -80,6 +79,26 @@ class User extends AbstractEntity
         return $this->icon;
     }
 
+    /**
+     * Setter pour la date de création. Si la date est une string, on la convertit en DateTime.
+     * @param string|DateTime $creationDate
+     * @param string $format : le format pour la convertion de la date si elle est une string.
+     * Par défaut, c'est le format de date mysql qui est utilisé. 
+     */
+    public function setCreationDate(string $creationDate) : void 
+    {
+        $this->creationDate = $creationDate;
+    }
 
+    /**
+     * Getter pour la date de création.
+     * Grâce au setter, on a la garantie de récupérer un objet DateTime.
+     * @return DateTime
+     */
+    public function getCreationDate() : string 
+    {
+         return $this->creationDate;
+    }
+    
 
 }

@@ -15,11 +15,11 @@
             <span><?=$book->getComment()?></span>
             <br><br><br>
             <p>PROPRIETAIRE</p>
-            <div id="owner">
+            <a id="owner" href="index.php?action=account&idUser=<?=$book->getidUser()?>">
                 <img src="img/icon/icontest.png" alt="">
-                <span><?=$book->getpseudo()?></span>
-            </div>
-            <a href="index.php?action=Message?id=<?=$book->getId()?>&id_user=<?=$book->getidUser()?>">Envoyer un message</a>
+                <span><?=$book->getPseudo()?></span>
+            </a>
+            <a id="sendMessage" href="index.php?action=Message?id=<?=$book->getId()?>&idUser=<?=$book->getidUser()?>">Envoyer un message</a>
         </div>
     </div>
 </div>

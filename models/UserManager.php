@@ -61,7 +61,7 @@ class UserManager extends AbstractEntityManager
      */
     public function setNewAccount( User $user) :bool
     {
-        $sql = "INSERT INTO users (pseudo, email, password, icon) VALUES (:pseudo , :email , :password , :icon)";
+        $sql = "INSERT INTO users (pseudo, email, password, icon, creation_date) VALUES (:pseudo , :email , :password , :icon, NOW())";
         $result = $this->db->query($sql, [
             'pseudo' => $user->getPseudo(),
             'email' => $user->getEmail(),
@@ -72,7 +72,7 @@ class UserManager extends AbstractEntityManager
     }
     /**
      * nouvelle instance de User.
-     * @param string $email, $pseudo, $icon, $password
+     * @param string $email, $pseudo, $icon, $password, $creationDate
      * @return ?User
      */
     public function setNewUser($email, $pseudo, $icon, $password) :User
@@ -84,5 +84,25 @@ class UserManager extends AbstractEntityManager
         $user->setPassword(password_hash($password,PASSWORD_DEFAULT));
         return $user;
     }
+    public function timing ($dateCreation) : string
+    {
+        $tDate = explode("-", $dateCreation);
+        $tNow =  explode("-", date("Y-n-j"));
+        if($tNow[0]-$tDate[0]>0){
+            $sinceDate = $tNow[0]-$tDate[0];
+            $sinceDate = $sinceDate . " an(s)";
+        } elseif ($tNow[1]-$tDate[1]>0) {
+            $sinceDate = $tNow[1]-$tDate[1];
+            $sinceDate = $sinceDate . " mois";
+        }elseif($tNow[2]-$tDate[2]>0) {
+            $sinceDate = $tNow[2]-$tDate[2];
+            $sinceDate = $sinceDate . " jours";
+        } else {
+            $sinceDate ="peu";
+        }
+
+        return $sinceDate;
+    }
+
 }
 

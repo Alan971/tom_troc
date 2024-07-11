@@ -161,19 +161,39 @@ class AdminController {
         $idUser= $_SESSION['idUser'];
         $user = new UserManager;
         $me = $user->getUserById($idUser);
+        $time = $user->timing($me->getcreationDate());   
         $books = new BookManager;
         $mybooks = [];
         if(is_array($books->getAllBookByUser(($me->getId())))) 
         {
             $mybooks = $books->getAllBookByUser(($me->getId()));
         }
-
+        echo "t=" .$time;
         // On affiche la page du compte.
-        $view = new View("myAccount");
-        $view->render("myAccount", [
-            'me' => $me, 'mybooks' => $mybooks
+        $view = new View("account");
+        $view->render("account", [
+            'me' => $me, 'mybooks' => $mybooks, 'time' =>  $time
         ]);
-
     }
+    public function showAccount() :void
+    {
+            
+        $idUser= Utils::request("idUser");
+        $user = new UserManager;
+        $me = $user->getUserById($idUser);
+        $time = $user->timing($me->getcreationDate());     
+        $books = new BookManager;
+        $mybooks = [];
+        if(is_array($books->getAllBookByUser(($me->getId())))) 
+        {
+            $mybooks = $books->getAllBookByUser(($me->getId()));
+        }
+        // On affiche la page du compte.
+        $view = new View("account");
+        $view->render("account", [
+            'me' => $me, 'mybooks' => $mybooks, 'time' =>  $time
+        ]);
+    }
+
    
 }

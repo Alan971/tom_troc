@@ -163,7 +163,7 @@
     width: 71%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content:flex-start;
     flex-wrap: wrap;
     padding-bottom: 30px;
 }
@@ -310,7 +310,7 @@
     font-weight: 400;
     line-height: 16.94px;
 }
-#description a {
+#sendMessage {
     background-color: var(--defaultGreenColor);
     border-radius: 15px;
     color: var(--backgroundPaleColor) ;
@@ -413,6 +413,16 @@ label{
     flex-direction: column;
     align-items: center;
 }
+#account {
+    width: 100%;
+    padding-top: 100px;
+    padding-left: 150px;
+    padding-right: 80px;
+    background-color: var(--backgroundColor);
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
 #title {
     width: 100%;
     padding-left: 10%;
@@ -424,10 +434,12 @@ label{
     flex-direction: row;
     justify-content: space-between;
 }
-#accountDetail, #personnalInfo, #myLibrary {
+#accountDetail, #personnalInfo, #table, #ownerDetail, #tableOwner {
     background-color: var(--backgroundPaleColor);
     border-radius: 15px;
     padding-top: 40px;
+    margin-bottom: 100px;
+    padding-bottom: 40px;
 }
 #accountDetail {
     width: 48%;
@@ -435,13 +447,19 @@ label{
     flex-direction: column;
     align-items: center;
 }
-#accountDetail img {
+#ownerDetail {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#accountDetail img , #ownerDetail img{
     margin-top: 20px;
     width: 136px;
     height: 136px;
     border-radius: 50%;
 }
-#accountDetail a {
+#modifyIcon {
     color: var(--hamzaColor);
     text-decoration: underline;
     font-size: 14px;
@@ -465,6 +483,10 @@ label{
 .nbBooks {
     text-align: center;  
 }
+.messagingButton {
+    margin-top: 30px;
+    padding : 10px;
+}
 
 #personnalInfo {
     width: 48%;
@@ -475,51 +497,87 @@ label{
     border-radius: 10px;
     padding-left: 10px;
 }
-
-#myLibrary {
-    width : 90%;
-    margin-top: 100px;
-    margin-bottom: 30px;
+#table, #tableOwner {
     display: flex;
-    justify-content: center;
+    padding-bottom: 0;
+    flex-direction:column;
 }
-td {
-    border: none;
+#table {
+    width : 80%;
 }
-th {
-    width: 16%;
-    border-bottom: 1px solid var(--hamzaColor);
-    text-align: start;
+#tableOwner {
+    width : 60%;
 }
-#myLibrary img{
-    width: 80px;
-    height: 80px;
 
+.tableRow, .tableRowsimplyfy {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+#thead p {
+    border-bottom: 1px solid var(--backgroundColor);
+    padding: 20px;
+}
+#tbody {
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+}
+.tableRow, .tableRowsimplyfy{
+    max-height: 130px;
+    padding: 10px;
+}
+.tableRow:last-child , .tableRowsimplyfy:last-child{
+    border-radius: 0% 0%  15px  15px;
+}
+.tableRow p {
+    width: 16%;
+    padding: 30px 10px 10px 10px;
+}
+.tableRowsimplyfy p {
+    width: 25%;
+    padding: 30px 10px 10px 10px;
+}
+
+.tableRow img{
+    width: 16%;
+    height: 100px;
+    padding: 15px 30px 15px 30px;
+}
+.tableRowsimplyfy img {
+    width: 25%;
+    height: 100px;
+    padding: 15px 30px 15px 30px;
+}
+.tableComment {
+    width: 16%;
+    height: 100px;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 10px;
+    overflow: hidden;
+    text-overflow : ellipsis;
+    font-size: 12px;
 }
 .flag1 {
-    background-color: var(--hamzaColor);
-    border: 1px solid var(--hamzaColor);
-}
-table {
-    border-spacing : 0;
-}
-td {
-    border: none;
+    background-color: var(--backgroundPaleGrey);
 }
 .dispo {
-    width: 70px;
+    width: 12%;
     height: 20px;
     border-radius: 30px;
     color: var(--backgroundPaleColor);
+    padding-left: 5px;
+    margin: 30px;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: center;
 }
 .superGreen {
     background-color: var(--defaultGreenColor);
-    width: 45%; 
-    text-align: center;
 }
 .red {
     background-color: var(--tagColor);
-    width: 50%;
 }
 #supprBook {
     padding: 5px;

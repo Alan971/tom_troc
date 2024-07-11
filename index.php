@@ -50,11 +50,15 @@ try {
             $adminController = new AdminController();
             $adminController->showMyAccount();
             break;
+        case 'account' :
+                $adminController = new AdminController();
+                $adminController->showAccount();
+                break;
         case 'Message' :
             
             break;
 
-        case 'profil':
+        case 'addBook':
 
             break;
         case 'edition':
