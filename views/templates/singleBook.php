@@ -1,6 +1,6 @@
 
 <div id = "singleBook">
-    <div id = "linkBack">
+    <div class = "linkBack">
         <a href="index.php?action=library">Nos livres > <?=$book->getTitle()?></a>
     </div>
     <div id = "singleBookDescription">

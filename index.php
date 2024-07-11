@@ -62,9 +62,22 @@ try {
             $bookController = new BookController();
             $bookController->removeBook();
             break;
-        case 'addBook':
-
+        case 'modifyBook' :
+            $bookController = new BookController();
+            $bookController->showModifyBook();
             break;
+        case 'doModifyBook' :
+            $bookController = new BookController();
+            $bookController->doModifyBook();
+            break;
+        case 'addBook':
+            $bookController = new BookController();
+            $bookController->showAddBook();
+            break;
+        case 'doAddBook' :
+            $bookController = new BookController();
+            $bookController->doAddBook();
+            break;           
         case 'edition':
 
             break;

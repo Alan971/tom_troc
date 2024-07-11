@@ -18,7 +18,7 @@
     padding-top: 20px;
     text-align: center;
 }
-
+/* page home */
 #homePartOne{
     background-color: var(--backgroundColor);
     width: 100%;
@@ -58,7 +58,6 @@
     max-height: 539px;
     padding-bottom: 20px;
 }
-
 #lastBooks{
     width: 100%;
     height:auto;
@@ -69,7 +68,6 @@
     padding: 40px;
     background-color: var(--backgroundPaleColor);
 }
-
 #homePartThree {
     background-color: var(--backgroundColor);
     width: 100%;
@@ -83,7 +81,6 @@
 #homePartThree span {
     width: 35%;
     padding:10px;
-
     font-size: 16px;
     font-weight: 300;
     line-height: 19.36px;
@@ -103,7 +100,6 @@
     margin-top: 20px;
     margin-left: 4%;
     padding: 10px;
-
     font-size: 14px;
     font-weight: 400;
     line-height: 16.94px;
@@ -122,7 +118,6 @@
     border-radius: 15px;
     border: 1px var(--defaultGreenColor) solid;
 }
-
 #homePartThree img {
     width: 100%;
     padding-top: 40px;
@@ -194,13 +189,14 @@
     font-weight: 400;
     text-align: left;
     margin: 5px; 
-    color:#A6A6A6;  
+    color : var(--hamzaColor);  
 }
 .Card p {
     text-align: left;
     margin: 5px; 
     padding-top: 15px;   
 }
+
 /* page library.php */
 #library {
    width: 100%; 
@@ -235,8 +231,8 @@
 #searchBar {
     width: 70%;
     height: 48px;
-    color : #A6A6A6;
-    border: 1px #A6A6A6 solid;
+    color : var(--hamzaColor);
+    border: 1px var(--hamzaColor) solid;
     display: flex;
     align-items: center;
 }
@@ -258,7 +254,110 @@
     border-radius: 5px 5px;
     padding-left: 2px;
 }
+/* page modifybook.php */
+#pageModifyBook {
+    width: 100%;
+    background-color: var(--backgroundPaleGrey);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#linkBacknTitle{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--backgroundPaleGrey);
+    padding-top: 20px;
+}
+#linkBacknTitle a {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--hamzaColor);
 
+    padding-bottom: 20px;
+}
+#singleBookRecap {
+    width: 80%;
+    background-color: var(--backgroundPaleColor);
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    border-radius: 15px;
+    padding : 30px;
+}
+#modifyPageLeft {
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+}
+#modifyPageLeft img{
+    width: 100%;
+    object-fit: contain;
+}
+#modifyPageLeft a{
+    width: 100%;
+    text-align: end;
+    text-decoration: underline;
+}
+#modifyPageRight {
+    width: 47%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: left;
+}
+#modifyPageLeft p, #modifyPageRight label {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--hamzaColor);
+    padding-bottom: 10px;
+}
+#modifyPageRight input, select{
+    width: 100%;
+    min-height: 50px;
+    border: none;
+    border-radius: 15%;
+    background-color: var(--backgroundPaleGrey);
+    margin-bottom: 40px;
+    font-size: larger;
+    padding-left: 10px;
+    text-wrap: wrap;
+}
+#modifyPageRight input:focus, select:focus, #inputComment:focus {
+    outline : none;
+}
+#inputComment {
+    border: none;
+    border-radius: 15px;
+    background-color: var(--backgroundPaleGrey);
+    width: 100%;
+    min-height: 300px;
+    line-height: 20px;
+    font-size: larger;
+    padding: 10px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    resize:vertical; 
+}
+#modifyBookButton {
+    width: 70%;
+    height: 60px;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    padding : 0;
+    background-color: var(--defaultGreenColor);
+    color: var(--backgroundPaleColor);
+    font-size: larger;
+}
+#modifyBookButton:hover {
+    font-weight: 700;
+}
+#modifyPageRight p {
+    color : var(--tagColor);
+    font-size: smaller;
+}
 /* page singleBook.php */
 #singleBook{
     width: 100%;
@@ -267,14 +366,14 @@
     align-items: center;
     background-color: var(--backgroundColor);
 }
-#linkBack {
+.linkBack {
     width: 75%;
     margin-top: 20px;
 }
-#linkBack a {
+.linkBack a {
     font-size: 10px;
     font-weight: 300;
-    color: #A6A6A6;
+    color: var(--hamzaColor);
 }
 #singleBookDescription {
     width: 100%;
@@ -335,7 +434,7 @@
     text-align: left;
 }
 #detail1{
-    color: #A6A6A6;
+    color: var(--hamzaColor);
     font-family: Inter;
     font-size: 16px;
     font-weight: 400;
@@ -372,7 +471,7 @@
     width: 322px;
     height: 50px;
     border: none;
-    background-color: var(--backgroundPaleColor);
+    background-color: var(--backgroundPaleGrey);
     margin-bottom: 40px;
     font-size: larger;
 }
@@ -513,21 +612,19 @@ label{
     width: 100%;
     display: flex;
     flex-direction: row;
+    max-height: 130px;
+    padding: 10px;
 }
 #thead p {
     border-bottom: 1px solid var(--backgroundColor);
-    padding: 20px;
+    padding: 10px;
 }
 #tbody {
     width: 100%;
     display: flex;
     flex-direction:column;
 }
-.tableRow, .tableRowsimplyfy{
-    max-height: 130px;
-    padding: 10px;
-}
-.tableRow:last-child , .tableRowsimplyfy:last-child{
+.tableRow:last-child , .tableRowsimplyfy:last-child {
     border-radius: 0% 0%  15px  15px;
 }
 .tableRow p {
@@ -538,11 +635,12 @@ label{
     width: 25%;
     padding: 30px 10px 10px 10px;
 }
-
 .tableRow img{
     width: 16%;
-    height: 100px;
-    padding: 15px 30px 15px 30px;
+
+    min-height: 120px;
+    height: auto;
+    padding: 0px 30px 15px 30px;
 }
 .tableRowsimplyfy img {
     width: 25%;

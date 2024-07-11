@@ -97,4 +97,46 @@ class BookManager extends AbstractEntityManager{
         $result = $this->db->query($sql, ['id' => $id]);
         return $result->rowCount() > 0;
     }
+    /**
+     * modifie un livre.
+     * @param Book $book
+     * @return bool
+     */
+    public function setBookById(Book $book) : ?bool 
+    {
+        // suppression en bdd
+        $sql = "UPDATE books 
+                SET title = :title , author = :author, comment = :comment , exchange = :exchange 
+                WHERE id = :id";
+        $result = $this->db->query($sql, [
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'comment' => $book->getComment(),
+            'exchange' => $book->getExchange(),
+            'id' => $book->getId()
+        ]);
+        return $result->rowCount() > 0;
+    }
+    /**
+     * ajoute un livre.
+     * @param Book $book
+     * @return bool
+     */
+    public function setNewBook(Book $book) : ?bool 
+    {
+        // suppression en bdd
+        $sql = "INSERT INTO books 
+                ( title, id_user , author , image, comment  , exchange  )
+                VALUES ( :title, :id_user, :author, :img, :comment, :exchange)";
+        $result = $this->db->query($sql, [
+            'title' => $book->getTitle(),
+            'id_user' => $book->getidUser(),
+            'author' => $book->getAuthor(),
+            'img' => $book->getImage(),
+            'comment' => $book->getComment(),
+            'exchange' => $book->getExchange()
+        ]);
+        return $result->rowCount() > 0;
+    }
+
 }

@@ -39,8 +39,10 @@ h1 {
 }
 
 h2{
-    font-family: Inter, sans-serif;
-    font-size: 32px;
+    font-family: 'Playfair Display';
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 34.66px;
     padding-bottom: 20px;
     color: var(--h2Color);
 }

@@ -34,9 +34,9 @@
                  <?=$i?> livres
             </div>
             <?if($me->getId()!=$_SESSION['idUser']) : ?>
-                <a class="linkGreenBorder messagingButton" href="index.php?action=Message?<?$me->getId()?>">Ecrire un message</a>
+                <a class="linkGreenBorder messagingButton" href="index.php?action=Message&idUser=<?$me->getId()?>">Ecrire un message</a>
             <?else :?>
-                <a class="linkGreenBorder messagingButton" href="index.php?action=addBook?<?$me->getId()?>">Ajouter un livre</a>
+                <a class="linkGreenBorder messagingButton" href="index.php?action=addBook">Ajouter un livre</a>
             <?endif; ?>
         </div>
         <!-- personnal info -->
