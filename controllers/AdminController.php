@@ -6,26 +6,6 @@
 class AdminController {
 
     /**
-     * Affiche la page d'administration.
-     * @return void
-     */
-    public function showAdmin() : void
-    {
-        // On vérifie que l'utilisateur est connecté.
-        $this->checkIfUserIsConnected();
-
-        // On récupère les livres.
-        $bookManager = new BookManager();
-        $books = $bookManager->getAllBookByUser($_SESSION['user']);
-
-        // On affiche la page d'administration.
-        $view = new View("Administration");
-        $view->render("admin", [
-            'articles' => $books
-        ]);
-    }
-
-    /**
      * Vérifie que l'utilisateur est connecté.
      * @return void
      */
@@ -80,8 +60,6 @@ class AdminController {
 
         // On vérifie que le mot de passe est correct.
         if (!password_verify($password, $user->getPassword())) {
-            var_dump($password);
-            var_dump($user->getPassword());
             $hash = password_hash($password, PASSWORD_DEFAULT);
             throw new Exception("Le mot de passe est incorrect.");
         }
@@ -136,7 +114,7 @@ class AdminController {
         $_SESSION['idUser'] = $user->getId();
 
         // On redirige vers la page de compte.
-        Utils::redirect("myAccount");
+        Utils::redirect("account");
 
     }
 
@@ -152,7 +130,10 @@ class AdminController {
         // On redirige vers la page d'accueil.
         Utils::redirect("home");
     }
-
+    /**
+     * dirige vers la page de compte utilisateur.
+     * @return void
+     */
     public function showMyAccount() :void
     {
         // On vérifie que l'utilisateur est connecté.
@@ -168,16 +149,18 @@ class AdminController {
         {
             $mybooks = $books->getAllBookByUser(($me->getId()));
         }
-        echo "t=" .$time;
         // On affiche la page du compte.
         $view = new View("account");
         $view->render("account", [
             'me' => $me, 'mybooks' => $mybooks, 'time' =>  $time
         ]);
     }
+    /**
+     * dirige vers la page de compte d'un utilisateur.
+     * @return void
+     */
     public function showAccount() :void
-    {
-            
+    {           
         $idUser= Utils::request("idUser");
         $user = new UserManager;
         $me = $user->getUserById($idUser);
@@ -195,5 +178,55 @@ class AdminController {
         ]);
     }
 
+    /**
+     * gère la modification de compte avant de renvoyer vers la page de compte de l'utilisateur.
+     * @return void
+     */
+    public function modifyAccount() :void 
+    {
+        // On vérifie que l'utilisateur est connecté.
+        $this->checkIfUserIsConnected();
+
+        $idUser = $_SESSION['idUser'];
+        $pseudo = Utils::request("pseudo");
+        $email = Utils::request("email");
+        $password = Utils::request("password");
+        //contrôle des éléments à modifier
+        $isvalid = "Il faut renseigner tous les champs";
+        if(isset($email) && isset($password) && isset($pseudo)){
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $isvalid = "L'adresse mail n'est pas correcte";
+            }
+            else {
+                $isvalid="ok";
+            }
+        }
+        // enregistrement dans la base
+        if($isvalid === "ok"){
+            $modifyUser = new UserManager;
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $result = $modifyUser->modifyAccount($idUser, $email, $hashedPassword, $pseudo);
+            if(!$result) {
+                throw new Exception("L'enregistrement n'a pas été effectué");
+            }
+            $isvalid = "Enregistrement effectué";
+        }
+
+        $user = new UserManager;
+        $me = $user->getUserById($idUser);
+        $time = $user->timing($me->getcreationDate());   
+        $books = new BookManager;
+        $mybooks = [];
+        if(is_array($books->getAllBookByUser(($me->getId())))) 
+        {
+            $mybooks = $books->getAllBookByUser(($me->getId()));
+        }
+
+        // On affiche la page du compte.
+        $view = new View("account");
+        $view->render("account", [
+            'me' => $me, 'mybooks' => $mybooks, 'time' =>  $time, 'isvalid' => $isvalid
+        ]);
+    }
    
 }

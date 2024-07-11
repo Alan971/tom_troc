@@ -33,7 +33,6 @@ try {
             $adminController = new AdminController();
             $adminController->displayConnectionForm();
             break;
-
         case 'connectUser':
             $adminController = new AdminController();
             $adminController->connectUser();
@@ -51,9 +50,13 @@ try {
             $adminController->showMyAccount();
             break;
         case 'account' :
-                $adminController = new AdminController();
-                $adminController->showAccount();
-                break;
+            $adminController = new AdminController();
+            $adminController->showAccount();
+            break;
+        case 'modifyAccount' :
+            $adminController = new AdminController();
+            $adminController->modifyAccount();        
+            break;
         case 'Message' :
             
             break;

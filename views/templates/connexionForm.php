@@ -7,7 +7,7 @@
                 <input type="email" name="email" id ="email" required>
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password" required>
-                <button class="linkGreen">S'inscrire</button>
+                <button class="linkGreen">Se connecter</button>
             </div>
         </form>
         <div class="changeChoice"><p>Pas de compte ?</p><a href="index.php?action=inscription">Inscrivez-vous</a></div>

@@ -42,7 +42,7 @@
         <!-- personnal info -->
         <? if ($me->getId()===$_SESSION['idUser']) : ?>
             <div id="personnalInfo">
-                <form action="index.php?action=myAccount" method="POST">
+                <form action="index.php?action=modifyAccount" method="POST">
                     <h3>Vos informations personnelles</h3>
                     <div class = "inscriptionForm">
                         <label for="email">Adresse email</label>
@@ -52,6 +52,9 @@
                         <label for="pseudo">Pseudo</label>
                         <input type="text" value="<?=$me->getPseudo()?>" name="pseudo" id = "pseudo" required>
                         <button class="linkGreenBorder">Enregistrer</button>
+                        <?if(isset($isvalid)) : ?>
+                            <p><?=$isvalid?></p>
+                        <?endif;?>
                     </div>
                 </form>
             </div>

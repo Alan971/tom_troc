@@ -70,6 +70,24 @@ class UserManager extends AbstractEntityManager
         ]);
         return $result->rowCount() > 0;
     }
+
+    /**
+     * modifie le compte utilisateur 
+     * @param $id, $email, $pwd, $pseudo
+     * @return bool
+     */
+    public function modifyAccount ($id, $email, $pwd, $pseudo) : bool
+    {
+        $sql = "UPDATE users SET email = :email, pseudo = :pseudo, password = :password WHERE id = :id";
+        $result = $this->db->query($sql, [
+            'pseudo' => $pseudo,
+            'email' => $email,
+            'password' => $pwd,
+            'id' => $id
+        ]); 
+        return $result->rowCount() > 0;
+    }
+
     /**
      * nouvelle instance de User.
      * @param string $email, $pseudo, $icon, $password, $creationDate
@@ -84,6 +102,11 @@ class UserManager extends AbstractEntityManager
         $user->setPassword(password_hash($password,PASSWORD_DEFAULT));
         return $user;
     }
+     /**
+     * gestion de l'affichage du temps.
+     * @param string $dateCreation
+     * @return string
+     */   
     public function timing ($dateCreation) : string
     {
         $tDate = explode("-", $dateCreation);
