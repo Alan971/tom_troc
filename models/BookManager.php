@@ -25,10 +25,10 @@ class BookManager extends AbstractEntityManager{
 
     /**
      * Récupère tous les livres d'un utilisateur.
-     * @param $id_user
+     * @param string $id_user
      * @return ?array
      */
-    public function getAllBookByUser($id_user) : ?array 
+    public function getAllBookByUser(string $id_user) : ?array 
     {
         $sql = "SELECT * FROM books WHERE id_user = :id";
         $result = $this->db->query($sql, ['id' => $id_user]);
@@ -45,10 +45,10 @@ class BookManager extends AbstractEntityManager{
 
     /**
      * Récupère un livre par son id.
-     * @param $id
+     * @param string $id
      * @return ?Book
      */    
-    public function getBookById($id) : ?Book 
+    public function getBookById(string $id) : ?Book 
     {
         $sql = "SELECT b.id, b.id_user, b.title, b.author, b.image, b.comment, b.exchange, u.pseudo 
                 FROM books b RIGHT JOIN users u ON b.id =:id GROUP BY b.id";
@@ -62,7 +62,7 @@ class BookManager extends AbstractEntityManager{
 
     /**
      * Récupère tous les livres.
-     * @param $order
+     * @param string $order
      * @return ?array
      */
     public function getAllBooks(?string $order) : ?array 

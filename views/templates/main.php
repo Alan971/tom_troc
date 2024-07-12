@@ -5,8 +5,11 @@
  * Les variables qui doivent impérativement être définie sont : 
  *      $title string : le titre de la page.
  *      $content string : le contenu de la page. 
+ *      $nbMessage string : nombre de message non lu
  */
 $action = Utils::request('action', '');
+$messageManager = new MessageManager();
+$nbMessages = $messageManager->countNewMessages($_SESSION['idUser']);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -47,7 +50,7 @@ $action = Utils::request('action', '');
         <div class="divHeaderRight">
             <nav class="headerRightNav" aria-roledescription="Navigation utilisateur">
                 <a href="index.php?action=Message"><i class="fa-regular fa-comment"></i>Messagerie</a>
-                <p>2</p>
+                <p><?=$nbMessages?></p>
                 <a href="index.php?action=myAccount"><i class="fa-regular fa-user"></i> Mon compte</a>
                 <?php 
                     // Si on est connecté, on affiche le bouton de déconnexion, sinon, on affiche le bouton de connexion : 

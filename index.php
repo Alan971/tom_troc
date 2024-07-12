@@ -78,11 +78,9 @@ try {
             $bookController = new BookController();
             $bookController->doAddBook();
             break;           
-        case 'edition':
-
-            break;
         case 'Message' :
-            
+            $messageController = new MessageController();
+            $messageController->showMessagePage();
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");
