@@ -39,7 +39,9 @@ class MessageManager extends AbstractEntityManager
     {
         $sql = "SELECT content, date, open_message FROM message WHERE id_from = :idTwitter AND id_To = :id ORDER BY date DESC LIMIT 1";
         $result = $this->db->query($sql, ['idTwitter' => $idTwitter, 'id' => $id]); 
-        return $result->fetch();
+        $lastMessage = $result->fetch();
+        $lastMessage['date'] = $this->setDateThreadToGoodFormat($lastMessage['date']);
+         return $lastMessage;
     }
 
     /**
@@ -49,10 +51,11 @@ class MessageManager extends AbstractEntityManager
      */
     private function getAllMessagesFromAUser($idFrom, $id) :?array
     {
-        $sql = "SELECT * FROM message WHERE id_From = :idFrom AND id_To = :id ORDER BY date DESC";
+        $sql = "SELECT * FROM message WHERE id_from = :idFrom AND id_to = :id ORDER BY date DESC";
         $result = $this->db->query($sql, ['idFrom' => $idFrom, 'id' => $id]);
         while ($message = $result->fetch()) {
-            if(!empty($message['id_From'])) {
+            if(!empty($message['id_from'])) {
+                // $message['date'] = $this->setDateMessageToGoodFormat($message['date']);
                 $messages [] = new Message($message);
             }
         }
@@ -68,10 +71,11 @@ class MessageManager extends AbstractEntityManager
      */
     private function getAllMessagesToAUser($idTo, $id) :?array
     {
-        $sql = "SELECT * FROM message WHERE id_To = :idTo AND id_From = :id ORDER BY date DESC";
+        $sql = "SELECT * FROM message WHERE id_to = :idTo AND id_from = :id ORDER BY date DESC";
         $result = $this->db->query($sql, ['idTo' => $idTo, 'id' => $id]);
         while ($message = $result->fetch()) {
-            if(!empty($message['id_From'])) {
+            if(!empty($message['id_to'])) {
+                // $message['date'] = $this->setDateMessageToGoodFormat($message['date']);
                 $messages [] = new Message($message);
             }
         }
@@ -87,11 +91,22 @@ class MessageManager extends AbstractEntityManager
      */
     private function mergeTableMessageAndOrder(?array $messagesFrom, ?array $messagesTo) : ?array
     {
-
-        $mergeMessages = $messagesFrom + $messagesTo;
-        if(is_array($mergeMessages)) {
-            $columns = array_column($mergeMessages, 'date');
-            array_multisort($columns, SORT_DESC, $mergeMessages);
+        // contrôle d'existance des message et merge des deux tableaux
+        if(is_array($messagesFrom) && is_array($messagesTo)) {
+            $mergeMessages = array_merge($messagesFrom, $messagesTo);
+        }
+        elseif(is_array($messagesFrom) && !is_array($messagesTo)) {
+            $mergeMessages = $messagesFrom;
+        }
+        elseif(!is_array($messagesFrom) && is_array($messagesTo)) {
+            $mergeMessages = $messagesTo;
+        }
+        // tri par date
+        if(isset($mergeMessages)){
+            usort($mergeMessages, function($a,$b){
+                return strtotime($a->getDate())-strtotime($b->getDate());
+                }
+            );
         }
         else {
             return null;
@@ -125,5 +140,63 @@ class MessageManager extends AbstractEntityManager
         }
         return "";
     }
+    /**
+     * compte le nombre de messages non lus
+     * @param  $idTwitter, $id
+     * @return void
+     */
+    public function setOpenMessageToZero ($idTwitter, $id) : void 
+    {
+        $sql = "UPDATE message SET open_message = 0 WHERE id_from = :idTwitter AND id_to = :id";
+        $result = $this->db->query($sql, ['idTwitter' => $idTwitter, 'id' => $id]);
+        $result->fetchAll();
+    }
+    /**
+    * compte le nombre de messages non lus
+    * @param  Message $message
+    * @return bool
+    */
+    public function createMessage(Message $newMessage) : bool 
+    {
+        $sql = "INSERT INTO message ( id_from, id_to, open_message, content, date ) VALUES (:idFrom, :idTo, '1', :content, NOW() )";
+        $result = $this->db->query($sql, [
+            'idFrom' => $newMessage->getidFrom() , 
+            'idTo' => $newMessage->getidTo(), 
+            'content' => $newMessage->getContent()]);
+        return $result->rowCount() > 0;
 
+    }
+
+    public function setDateMessageToGoodFormat(string $date) : string 
+    {
+        // set last year date
+        if (date('Y') - date('Y', strtotime($date)) > 0){
+            return date('Y.m.d', strtotime($date));
+        }
+        // set today date
+        elseif (date('m') === date('m', strtotime($date)) && date('d') === date('d', strtotime($date))) {
+            return date('H:i', strtotime($date));
+        }
+        // set last day date
+        else {
+            return date('m.d H:i', strtotime($date));
+        }
+        
+    }
+    public function setDateThreadToGoodFormat(string $date) : string 
+    {
+        // set last year date
+        if (date('Y') - date('Y', strtotime($date)) > 0){
+            return date('Y.m.d', $date);
+        }
+        // set today date
+        elseif (date('m') === date('m', strtotime($date)) && date('d') === date('d', strtotime($date))) {
+            var_dump(date('H:i', strtotime($date)));
+            return date('H:i', strtotime($date));
+        }
+        // set last day date
+        else {
+            return date('m.d', strtotime($date));
+        }
+    }
 }

@@ -9,6 +9,7 @@
     --textColor: black;
     --h2Color: #292929;
     --hamzaColor: #A6A6A6;
+    --pBlue : #EDF2F6;
 }
 /* Pour les boutons de couleur verte */
 .linkGreen {
@@ -764,12 +765,8 @@ label{
     padding-top: 50px;
     padding-bottom: 20px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-#showThread {
-    width: 100%;
-    min-height: 200px;
+    flex-direction : column;
+    justify-content : end;
 }
 #sendMessageForm {
     width: 100%;
@@ -779,6 +776,7 @@ label{
 }
 #conversation input {
     border : none;
+    border-radius: 3px;
     background-color: var(--backgroundPaleColor);
     padding-left: 10px;
 }
@@ -804,6 +802,63 @@ label{
 
 }
 
+#showThread {
+    width: 100%;
+    max-height: max-content;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+}
+.blocDate {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.blocDate img {
+    width: 24px;
+    height: 24px;
+    border-radius: 15px;
+}
+.leftPositionMessageDate {
+    width: auto;
+    font-size: 12px;
+    color: var(--hamzaColor);
+    text-align: start;
+}
+.leftPostionMessage {
+    width: fit-content;
+    text-wrap:wrap;
+    max-width: 80%;
+    min-height: 37px;
+    font-size: 12px;
+    padding: 10px;
+    margin-bottom: 40px;
+    color: var(--h2Color);
+    background-color: var(--backgroundPaleColor);
+    border-radius: 3px;
+}
+.rightPositionMessageDate {
+    width: auto;
+    font-size: 12px;
+    color: var(--hamzaColor);
+    text-align: end;
+}
+.rightPostionMessage {
+    width: fit-content;
+    text-wrap:wrap;
+    max-width: 80%;
+    height: auto;
+    min-height: 37px;
+    font-size: 12px;
+    padding: 10px;
+    color: var(--h2Color);
+    background-color: var(--pBlue);
+    border-radius: 3px;
+    text-align: end;
+    align-self: flex-end;
+}
 
 /* SVG style  */
 polygon{

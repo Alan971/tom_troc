@@ -22,11 +22,37 @@
     </div>
     <div id="conversation">
         <div id="showThread">
-            
+            <?php
+            if (isset($messages)) {
+                foreach($messages as $message){
+                    if($message->getidTo() === $idUser) :?>
+                        <div class = "blocDate">
+                            <img src=" <?= $userTalking->getIcon() ?> " >
+                            <p class = "leftPositionMessageDate">
+                                <?=$message->getDate() ?>
+                            </p> 
+                        </div>
+                        <p class = 'leftPostionMessage'>
+                            <?= $message->getContent() ?>
+                        </p>
+                    <?endif;?>
+                    <? if($message->getidFrom() === $idUser) :?>
+                        <p class = 'rightPositionMessageDate'>
+                            <?=$message->getDate() ?>
+                        </p> 
+                        <p class = 'rightPostionMessage'>
+                            <?= $message->getContent() ?>
+                        </p>
+                    <?endif;
+                }
+            }
+            ?>
         </div>
-        <form id="sendMessageForm" action="index.php?action=addMessage">
-            <input type="text" placeholder="tapez votre message ici">
+        <? if(isset($userTalking)) :?>
+        <form id="sendMessageForm" action="index.php?action=addMessage&idTwitter=<?=$userTalking->getId()?>" method="POST">
+            <input type="text" name="newMessage" id="newMessage" placeholder="tapez votre message ici">
             <button>Envoyer</button>
         </form>
+        <?endif;?>
     </div>
 </div>

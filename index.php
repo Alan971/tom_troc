@@ -82,6 +82,9 @@ try {
             $messageController = new MessageController();
             $messageController->showMessagePage();
             break;
+        case 'addMessage' :
+            $messageController = new MessageController();
+            $messageController->addMessage();
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

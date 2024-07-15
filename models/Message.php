@@ -62,36 +62,35 @@ class Message extends AbstractEntity
 
     /**
      * Setter pour l'id de l'utilisateur emeteur du message. 
-     * @param int $content
+     * @param string $content
      */
-    public function setContent(int $content) : void 
+    public function setContent(string $content) : void 
     {
         $this->content = $content;
     }
     /**
      * Getter pour l'id de l'utilisateur emeteur du message.
-     * @return int
+     * @return string
      */
-    public function getContent() : int 
+    public function getContent() : string 
     {
         return $this->content;
     }
     /**
      * Setter pour l'id de l'utilisateur emeteur du message. 
-     * @param int $date
+     * @param string $date
      */
-    public function setDate(int $date) : void 
+    public function setDate(string $date) : void 
     {
         $this->date = $date;
     }
     /**
      * Getter pour l'id de l'utilisateur emeteur du message.
-     * @return int
+     * @return string
      */
-    public function getDate() : int 
+    public function getDate() : string 
     {
         return $this->date;
     }
-
 
 }
