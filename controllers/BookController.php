@@ -38,7 +38,8 @@ class BookController {
     public function showSingleBook() :void {
         // Récupération de l'id du livre demandé.
         $id = Utils::request("id", -1);
-        
+        $idUser = $_SESSION['idUser'];
+
         $bookManager = new BookManager();
         $book = $bookManager->getBookById($id);
 
@@ -47,7 +48,7 @@ class BookController {
         $owner = $bookOwner->getUserById($book->getidUser());
 
         $view = new View($book->getTitle());
-        $view->render("singleBook", ['book' => $book, 'owner' => $owner]);
+        $view->render("singleBook", ['book' => $book, 'owner' => $owner, 'idUser' => $idUser]);
     }
 
     /**

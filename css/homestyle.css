@@ -379,7 +379,7 @@
 }
 #singleBookDescription {
     width: 100%;
-    background-color: var(--backgroundPaleColor);
+    background-color: var(--backgroundPaleGrey);
     display: flex;
     flex-direction: row;
 }
@@ -391,21 +391,46 @@
     padding: 70px;
     padding-right: 100px;
 }
-#owner {
+#titleSingleBook {
     width: 100%;
+}
+#titleSingleBook h3 {
+    color: var(--hamzaColor);
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    text-align: left;
+}
+#singleBookLigne {
+    width: 10%;
+    height: 30px;
+    border-bottom: 1px solid var(--hamzaColor);
+}
+#singleBookContent {
+    width: 100%;
+}
+#singleBookContent p {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+#owner {
+    width: fit-content;
+    background-color: var(--backgroundPaleColor);
+    border-radius: 20px;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    margin-top: 20px;
+    align-items: center; 
+    padding-right: 10px;
 }
 #owner img {
     width: 50px;
     height: 50px;
     border-radius: 30px;
-    margin-right: 10px;   
+    margin-left: 10px;   
 }
-#owner span{
-    color: #292929;
+#owner p{
+    color :var(--h2Color);
     font-family: Inter;
     font-size: 14px;
     font-weight: 400;
@@ -422,26 +447,22 @@
     padding-top: 15px;
     text-align: center;
 }
-#singleBook p {
+#singleBook h4 {
     font-family: Inter;
     font-size: 8px;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-align: left;
+    padding-bottom: 20px;
+    padding-top: 30px;
 }
-#singleBook span {
+#singleBook p {
     font-family: Inter;
     font-size: 14px;
     font-weight: 400;
     text-align: left;
 }
-#detail1{
-    color: var(--hamzaColor);
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.36px;
-}
+
 
 /* User management */
 .inscription {
