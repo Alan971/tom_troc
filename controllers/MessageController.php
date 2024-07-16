@@ -26,19 +26,22 @@ class MessageController {
         // récupération de l'échange en cours s'il existe
         $userTalking = NULL;
         $messages = [];
-        if(isset($idTwitter)) {
-            if ($idTwitter!="") {
-                $messages = $messageManager->getMessagesByUser($idTwitter,$idUser);
-                foreach($users as $user) {
-                    if ($user->getId() === (int) $idTwitter){
-                        $userTalking = $user;
-                    }
+        if ($idTwitter!="") {
+            $messages = $messageManager->getMessagesByUser($idTwitter,$idUser);
+            foreach($users as $user) {
+                if ($user->getId() === (int) $idTwitter){
+                    $userTalking = $user;
                 }
-                $messageManager->setOpenMessageToZero($idTwitter, $idUser);
             }
+            $messageManager->setOpenMessageToZero($idTwitter, $idUser);
         }
         $view = new View("Messagerie");
-        $view->render("message", ['idUser' => $idUser, 'userTalking' => $userTalking , 'users' => $users , 'messages' => $messages, 'lastContentnDate' => $lastContentnDate]);
+        $view->render("message", [
+            'idUser' => $idUser, 
+            'userTalking' => $userTalking , 
+            'users' => $users , 
+            'messages' => $messages, 
+            'lastContentnDate' => $lastContentnDate]);
     }
 
     public function addMessage() : void
@@ -57,10 +60,43 @@ class MessageController {
         $message->setidTo($idTwitter);
 
         $messageManager = new MessageManager ;
-        $users = $messageManager->createMessage($message);
+        $messageManager->createMessage($message);
 
         $this->showMessagePage();
     }
 
+    public function sendMessageFromSingleBook() : void {
+        // On vérifie que l'utilisateur est connecté.
+        $owner = new AdminController;
+        $owner->checkIfUserIsConnected();
+
+        $idUser = $_SESSION['idUser'];
+        $idTwitter = Utils::request('idBookOwner', "");
+        $idBook = Utils::request('idBook', "");
+        
+        //récupération des échanges
+        $messageManager = new MessageManager ;
+        $users = $messageManager->getAllUsersTalkingWith($idUser);
+        foreach ($users as $user){
+            $lastContentnDate [] = $messageManager->getLastMessageById($user->getId(), $idUser);
+        }
+        // récupération de l'échange en cours s'il existe
+        $userTalking = NULL;
+        $messages = [];
+        if ($idTwitter!="") {
+            $messages = $messageManager->getMessagesByUser($idTwitter,$idUser);
+            $userTalking = new User();
+            $userTalking->setId($idTwitter);
+
+            $messageManager->setOpenMessageToZero($idTwitter, $idUser);
+        }
+        $view = new View("Messagerie");
+        $view->render("message", [
+            'idUser' => $idUser, 
+            'userTalking' => $userTalking , 
+            'users' => $users , 
+            'messages' => $messages, 
+            'lastContentnDate' => $lastContentnDate]);
+    }
 
 }

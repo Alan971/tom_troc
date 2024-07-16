@@ -12,7 +12,7 @@ class MessageManager extends AbstractEntityManager
     public function getAllUsersTalkingWith($idUser) :?array
     {
         $sql = "SELECT id_From, id_To FROM message WHERE id_From =:id OR id_To = :id 
-        GROUP BY id_From, id_To ORDER BY date DESC";
+        GROUP BY id_From, id_To ORDER BY date ASC";
         $result = $this->db->query($sql, ['id' => $idUser]);
         while ($idUsers = $result->fetch()) {
             if(!empty($idUsers['id_From'])) {
@@ -33,15 +33,24 @@ class MessageManager extends AbstractEntityManager
     /**
      * récupère le dernier message envoyé par celui avec qui l'utilisateur a une conversation. 
      * @param $idTwitter, $id
-     * @return array
+     * @return ?array
      */
-    public function getLastMessageById($idTwitter, $id) :array
+    public function getLastMessageById($idTwitter, $id) : ?array
     {
+
+
         $sql = "SELECT content, date, open_message FROM message WHERE id_from = :idTwitter AND id_To = :id ORDER BY date DESC LIMIT 1";
         $result = $this->db->query($sql, ['idTwitter' => $idTwitter, 'id' => $id]); 
         $lastMessage = $result->fetch();
-        $lastMessage['date'] = $this->setDateThreadToGoodFormat($lastMessage['date']);
-         return $lastMessage;
+        if (isset($lastMessage['date'])){
+            $lastMessage['date'] = $this->setDateThreadToGoodFormat($lastMessage['date']);
+            return $lastMessage;
+        }
+        // initialisation en cas de creation de nouvelle conversation
+        $noMessage['date'] = "";
+        $noMessage['content']="";
+        $noMessage['open_message']=0;
+        return $noMessage;
     }
 
     /**
@@ -55,7 +64,7 @@ class MessageManager extends AbstractEntityManager
         $result = $this->db->query($sql, ['idFrom' => $idFrom, 'id' => $id]);
         while ($message = $result->fetch()) {
             if(!empty($message['id_from'])) {
-                // $message['date'] = $this->setDateMessageToGoodFormat($message['date']);
+                $message['dateViewable'] = $this->setDateMessageToGoodFormat($message['date']);
                 $messages [] = new Message($message);
             }
         }
@@ -75,7 +84,7 @@ class MessageManager extends AbstractEntityManager
         $result = $this->db->query($sql, ['idTo' => $idTo, 'id' => $id]);
         while ($message = $result->fetch()) {
             if(!empty($message['id_to'])) {
-                // $message['date'] = $this->setDateMessageToGoodFormat($message['date']);
+                $message['dateViewable'] = $this->setDateMessageToGoodFormat($message['date']);
                 $messages [] = new Message($message);
             }
         }
@@ -171,7 +180,7 @@ class MessageManager extends AbstractEntityManager
     {
         // set last year date
         if (date('Y') - date('Y', strtotime($date)) > 0){
-            return date('Y.m.d', strtotime($date));
+            return date('d.m.Y', strtotime($date));
         }
         // set today date
         elseif (date('m') === date('m', strtotime($date)) && date('d') === date('d', strtotime($date))) {
@@ -179,7 +188,7 @@ class MessageManager extends AbstractEntityManager
         }
         // set last day date
         else {
-            return date('m.d H:i', strtotime($date));
+            return date('d.m H:i', strtotime($date));
         }
         
     }
@@ -187,7 +196,7 @@ class MessageManager extends AbstractEntityManager
     {
         // set last year date
         if (date('Y') - date('Y', strtotime($date)) > 0){
-            return date('Y.m.d', $date);
+            return date('d.m.Y', $date);
         }
         // set today date
         elseif (date('m') === date('m', strtotime($date)) && date('d') === date('d', strtotime($date))) {
@@ -196,7 +205,7 @@ class MessageManager extends AbstractEntityManager
         }
         // set last day date
         else {
-            return date('m.d', strtotime($date));
+            return date('d.m', strtotime($date));
         }
     }
 }

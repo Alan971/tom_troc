@@ -12,7 +12,11 @@
                         <p class="pseudoMsg"><?=$user->getPseudo()?></p>
                         <p class="dateMsg"><?=$lastContentnDate[$i]['date']?></p>
                     </div>
-                    <p class="partMessage"><?=$lastContentnDate[$i]['content']?></p>
+                    <?if($lastContentnDate[$i]['open_message']) : ?>
+                        <p class="partMessage unread"><?=$lastContentnDate[$i]['content']?></p>
+                    <?else : ?>
+                        <p class="partMessage"><?=$lastContentnDate[$i]['content']?></p>
+                    <?endif;?>
                 </div>
             </a>
         <?
@@ -29,7 +33,7 @@
                         <div class = "blocDate">
                             <img src=" <?= $userTalking->getIcon() ?> " >
                             <p class = "leftPositionMessageDate">
-                                <?=$message->getDate() ?>
+                                <?=$message->getDateViewable() ?>
                             </p> 
                         </div>
                         <p class = 'leftPostionMessage'>
@@ -38,7 +42,7 @@
                     <?endif;?>
                     <? if($message->getidFrom() === $idUser) :?>
                         <p class = 'rightPositionMessageDate'>
-                            <?=$message->getDate() ?>
+                            <?=$message->getDateViewable() ?>
                         </p> 
                         <p class = 'rightPostionMessage'>
                             <?= $message->getContent() ?>

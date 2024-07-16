@@ -42,8 +42,12 @@ class BookController {
         $bookManager = new BookManager();
         $book = $bookManager->getBookById($id);
 
+        //récupération des informations du propriétaire
+        $bookOwner = new UserManager;
+        $owner = $bookOwner->getUserById($book->getidUser());
+
         $view = new View($book->getTitle());
-        $view->render("singleBook", ['book' => $book]);
+        $view->render("singleBook", ['book' => $book, 'owner' => $owner]);
     }
 
     /**

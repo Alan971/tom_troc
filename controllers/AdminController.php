@@ -13,7 +13,7 @@ class AdminController {
     {
         // On vérifie que l'utilisateur est connecté.
         if (!isset($_SESSION['user'])) {
-            Utils::redirect("connectionForm");
+            $this->displayConnectionForm();
         }
     }
 
