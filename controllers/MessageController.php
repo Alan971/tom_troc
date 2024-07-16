@@ -72,7 +72,6 @@ class MessageController {
 
         $idUser = $_SESSION['idUser'];
         $idTwitter = Utils::request('idBookOwner', "");
-        $idBook = Utils::request('idBook', "");
         
         //récupération des échanges
         $messageManager = new MessageManager ;
@@ -86,8 +85,8 @@ class MessageController {
         if ($idTwitter!="") {
             $messages = $messageManager->getMessagesByUser($idTwitter,$idUser);
             $userTalking = new User();
-            $userTalking->setId($idTwitter);
-
+            $userTalking->setId((int) $idTwitter);
+            
             $messageManager->setOpenMessageToZero($idTwitter, $idUser);
         }
         $view = new View("Messagerie");

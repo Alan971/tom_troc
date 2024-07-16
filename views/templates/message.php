@@ -4,8 +4,15 @@
         <?php
         $i=0;
         foreach($users as $user){
-        ?>
-            <a class="cardMessage" href="index.php?action=Message&idTwitter=<?=$user->getId()?>">
+            if($userTalking!==null) :
+                if($user->getId() === $userTalking->getId()) : ?>
+                    <a class="cardMessage changeBG" href="index.php?action=Message&idTwitter=<?=$user->getId()?>">
+                <? else : ?>
+                    <a class="cardMessage" href="index.php?action=Message&idTwitter=<?=$user->getId()?>">
+                <? endif; ?>
+            <? else : ?>    
+                <a class="cardMessage" href="index.php?action=Message&idTwitter=<?=$user->getId()?>">
+            <? endif; ?>
                 <img src="<?=$user->getIcon()?>" alt="<?=$user->getPseudo()?>">
                 <div class="carDetail">
                     <div class="cardUpperLine">

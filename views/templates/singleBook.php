@@ -27,7 +27,7 @@
                         <img src="<?=$owner->getIcon()?>" alt="">
                         <span><?=$owner->getPseudo()?></span>
                     </a>
-                    <a id="sendMessage" href="index.php?action=MessageFromSingleBook&idBook=<?=$book->getId()?>&idBookOwner=<?=$book->getidUser()?>">
+                    <a id="sendMessage" href="index.php?action=MessageFromSBorAcc&idBookOwner=<?=$book->getidUser()?>">
                         Envoyer un message
                     </a>
                 <? endif; ?>

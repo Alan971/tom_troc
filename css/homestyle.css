@@ -740,6 +740,9 @@ label{
     background-color: var(--backgroundPaleGrey);
     display: flex;
 }
+.changeBG {
+    background-color: var(--backgroundPaleColor);
+}
 .cardMessage:hover {
     background-color: var(--backgroundPaleColor);
 }
