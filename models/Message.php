@@ -9,6 +9,7 @@ class Message extends AbstractEntity
     private bool $openMessage;
     private string $content = "";
     private string $date;
+    private string $dateViewable;
 
     /**
      * Setter pour l'id de l'utilisateur emeteur du message. 
@@ -44,7 +45,7 @@ class Message extends AbstractEntity
         return $this->idTo;
     }
 /**
-     * Setter pour l'id de l'utilisateur emeteur du message. 
+     * Setter pour l'ouverture du message de l'utilisateur emeteur du message. 
      * @param int $openMessage
      */
     public function setOpenMessage(int $openMessage) : void 
@@ -52,7 +53,7 @@ class Message extends AbstractEntity
         $this->openMessage = $openMessage;
     }
     /**
-     * Getter pour l'id de l'utilisateur emeteur du message.
+     * Getter pour l' ouverture du message de l'utilisateur emeteur du message.
      * @return int
      */
     public function getOpenMessage() : int 
@@ -61,7 +62,7 @@ class Message extends AbstractEntity
     }
 
     /**
-     * Setter pour l'id de l'utilisateur emeteur du message. 
+     * Setter pour le contenu de l'utilisateur emeteur du message. 
      * @param string $content
      */
     public function setContent(string $content) : void 
@@ -69,7 +70,7 @@ class Message extends AbstractEntity
         $this->content = $content;
     }
     /**
-     * Getter pour l'id de l'utilisateur emeteur du message.
+     * Getter pour le contenu de l'utilisateur emeteur du message.
      * @return string
      */
     public function getContent() : string 
@@ -77,7 +78,7 @@ class Message extends AbstractEntity
         return $this->content;
     }
     /**
-     * Setter pour l'id de l'utilisateur emeteur du message. 
+     * Setter pour la date de l'utilisateur emeteur du message. 
      * @param string $date
      */
     public function setDate(string $date) : void 
@@ -85,7 +86,7 @@ class Message extends AbstractEntity
         $this->date = $date;
     }
     /**
-     * Getter pour l'id de l'utilisateur emeteur du message.
+     * Getter pour la date de l'utilisateur emeteur du message.
      * @return string
      */
     public function getDate() : string 
@@ -93,4 +94,20 @@ class Message extends AbstractEntity
         return $this->date;
     }
 
+    /**
+     * Setter pour la date visible de l'utilisateur emeteur du message. 
+     * @param string $dateViewable
+     */
+    public function setDateViewable(string $dateViewable) : void 
+    {
+        $this->dateViewable = $dateViewable;
+    }
+    /**
+     * Getter pour la date visible de l'utilisateur emeteur du message.
+     * @return string
+     */
+    public function getDateViewable() : string 
+    {
+        return $this->dateViewable;
+    }
 }
