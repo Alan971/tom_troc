@@ -61,7 +61,7 @@
         </div>
         <? if(isset($userTalking)) :?>
         <form id="sendMessageForm" action="index.php?action=addMessage&idTwitter=<?=$userTalking->getId()?>" method="POST">
-            <input type="text" name="newMessage" id="newMessage" placeholder="tapez votre message ici">
+            <input type="text" name="newMessage" id="newMessage" placeholder="tapez votre message ici" autocomplete="off">
             <button>Envoyer</button>
         </form>
         <?endif;?>

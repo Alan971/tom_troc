@@ -15,7 +15,16 @@
     <?endif;?>
             <img src="<?=$me->getIcon()?>" alt="">
             <? if ($me->getId()===$_SESSION['idUser']) : ?>
-                <a id="modifyIcon" href="">modifier</a>
+                <? if($InputIcon === "") : ?>
+                    <a id="modifyIcon" href="index.php?action=modifyUserIcon&InputIcon=1">modifier</a>
+                <?elseif($InputIcon ==="1") :?>
+                    <form  id="selectFile" method="POST" action="index.php?action=uploadIcon" enctype="multipart/form-data" >
+                        <label for="imageUpload" title="Cherchez le fichier à uploader"><?=$errorTxt?></label>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
+                        <input id = "imageUpload" type = "file" name = "imageUpload" />
+                        <input id = "registerButton" name = "submit" type = "submit" value = "Enregistrer" />
+                    </form>
+                <? endif;?>
             <?endif;?>
             <p id="pseudoName"><?=$me->getPseudo()?></p>
             <p >Membre depuis <?=$time?></p>
@@ -34,9 +43,13 @@
                  <?=$i?> livres
             </div>
             <?if($me->getId()!=$_SESSION['idUser']) : ?>
-                <a class="linkGreenBorder messagingButton" href="index.php?action=MessageFromSBorAcc&idBookOwner=<?$me->getId()?>">Ecrire un message</a>
+                <a class="linkGreenBorder messagingButton" href="index.php?action=MessageFromSBorAcc&idBookOwner=<?=$me->getId()?>">
+                    Ecrire un message
+                </a>
             <?else :?>
-                <a class="linkGreenBorder messagingButton" href="index.php?action=addBook">Ajouter un livre</a>
+                <a class="linkGreenBorder messagingButton" href="index.php?action=addBook">
+                    Ajouter un livre
+                </a>
             <?endif; ?>
         </div>
         <!-- personnal info -->

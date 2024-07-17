@@ -1,11 +1,12 @@
 <div id="library">
     <div id="titleSearchLibrary">
         <h2>Nos livres à l'échange</h2>
-        <form action="index.php?action=library" method="POST">
+        <form action="index.php" method="GET">
+            <input type="hidden" name="action" value="library">
             <label for="search" name="search"></label>
             <div id = "searchBar">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" name="search" id="search" placeholder=" Rechercher un livre">
+                <input type="search" name="search" id="search" placeholder=" Rechercher un livre" value="<?=$_GET['search']?>">
             </div>
             <input type="submit" hidden>
         </form>

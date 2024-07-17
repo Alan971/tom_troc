@@ -23,8 +23,10 @@ class BookController {
      */
     public function showLibrary() :void {
 
+        $search = Utils::request("search", null);
+        
         $bookManager = new BookManager();
-        $books = $bookManager->getAllBooks("");
+        $books = $bookManager->getAllBooks("", $search);
 
         $view = new View("Nos livres");
         $view->render("library", ['books' => $books]);

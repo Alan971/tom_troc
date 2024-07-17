@@ -5,6 +5,8 @@
  
 class AdminController {
 
+    private string $errorTxt = "";
+
     /**
      * Vérifie que l'utilisateur est connecté.
      * @return void
@@ -46,6 +48,7 @@ class AdminController {
         // On récupère les données du formulaire.
         $email = Utils::request("email");
         $password = Utils::request("password");
+
         // On vérifie que les données sont valides.
         if (empty($email) || empty($password)) {
             throw new Exception("Tous les champs sont obligatoires.");
@@ -139,7 +142,14 @@ class AdminController {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
         
-        $idUser= $_SESSION['idUser'];
+        $idUser = $_SESSION['idUser'];
+        if (empty($this->errorTxt)) {
+            $inputIcon = Utils::request("InputIcon", "");
+        }
+        else {
+            $inputIcon = "1";
+        }
+        
         $user = new UserManager;
         $me = $user->getUserById($idUser);
         $time = $user->timing($me->getcreationDate());   
@@ -149,10 +159,15 @@ class AdminController {
         {
             $mybooks = $books->getAllBookByUser(($me->getId()));
         }
+
         // On affiche la page du compte.
         $view = new View("account");
         $view->render("account", [
-            'me' => $me, 'mybooks' => $mybooks, 'time' =>  $time
+            'me' => $me, 
+            'mybooks' => $mybooks, 
+            'time' =>  $time, 
+            'InputIcon' => $inputIcon,
+            'errorTxt' => $this->errorTxt
         ]);
     }
     /**
@@ -162,6 +177,7 @@ class AdminController {
     public function showAccount() :void
     {           
         $idUser= Utils::request("idUser");
+
         $user = new UserManager;
         $me = $user->getUserById($idUser);
         $time = $user->timing($me->getcreationDate());     
@@ -174,7 +190,10 @@ class AdminController {
         // On affiche la page du compte.
         $view = new View("account");
         $view->render("account", [
-            'me' => $me, 'mybooks' => $mybooks, 'time' =>  $time
+            'me' => $me, 
+            'mybooks' => $mybooks, 
+            'time' =>  $time, 
+            'errorTxt' => $this->errorTxt
         ]);
     }
 
@@ -191,6 +210,7 @@ class AdminController {
         $pseudo = Utils::request("pseudo");
         $email = Utils::request("email");
         $password = Utils::request("password");
+        
         //contrôle des éléments à modifier
         $isvalid = "Il faut renseigner tous les champs";
         if(isset($email) && isset($password) && isset($pseudo)){
@@ -225,8 +245,25 @@ class AdminController {
         // On affiche la page du compte.
         $view = new View("account");
         $view->render("account", [
-            'me' => $me, 'mybooks' => $mybooks, 'time' =>  $time, 'isvalid' => $isvalid
+            'me' => $me, 
+            'mybooks' => $mybooks, 
+            'time' =>  $time, 
+            'isvalid' => $isvalid,  
+            'errorTxt' => $this->errorTxt
         ]);
     }
    
+    /**
+     * modification de l'icon de l'utilisateur.
+     * @return void
+     */
+    public function askForUserIcon() : void {
+
+        $idUser= $_SESSION['idUser'];
+
+       //téléchargement sur le serveur
+        $uploadIcon = new UploadImg();
+        $this->errorTxt = $uploadIcon->setUserIcon("imageUpload", "img/icon/", $idUser);
+        $this->showMyAccount();
+    }
 }

@@ -65,11 +65,27 @@ class BookManager extends AbstractEntityManager{
      * @param string $order
      * @return ?array
      */
-    public function getAllBooks(?string $order) : ?array 
+    public function getAllBooks(?string $order, ?string $search) : ?array 
     {
-        $sql = "SELECT b.id, b.id_user, b.title, b.author, b.image, b.comment, b.exchange, u.pseudo 
-                FROM books b RIGHT JOIN users u ON b.id_user = u.id ORDER BY b.id " .$order;
-        $result = $this->db->query($sql);
+        if (!empty($search)){
+            $search = trim($search);
+        }
+        $params = [];
+        // base request
+        $sql = <<<EOD
+            SELECT b.id, b.id_user, b.title, b.author, b.image, b.comment, b.exchange, u.pseudo 
+            FROM books b 
+            RIGHT JOIN users u ON b.id_user = u.id
+            EOD;
+        // add search
+        if ($search !== null && !empty($search)) {
+            $sql .= " WHERE (b.title LIKE :search OR b.author LIKE :search)";
+            $params['search'] = '%' . $search . '%';
+        }
+
+        $sql .= " ORDER BY b.id " .$order;
+
+        $result = $this->db->query($sql, $params);
         while ($book = $result->fetch()) {
             if(!empty($book['id'])){
                 $bookList[] = new Book($book);
@@ -78,7 +94,7 @@ class BookManager extends AbstractEntityManager{
         if(isset($bookList)){
             return $bookList;
         }
-        return null;
+        return [];
     }
 
     /**

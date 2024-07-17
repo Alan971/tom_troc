@@ -5,7 +5,7 @@
 class MessageController {
 
     /**
-     * Envoi vers la messagerie
+     * affichage de la page de messagerie
      * @return void
      */
     public function showMessagePage() :void
@@ -20,21 +20,13 @@ class MessageController {
         //récupération des échanges
         $messageManager = new MessageManager ;
         $users = $messageManager->getAllUsersTalkingWith($idUser);
-        foreach ($users as $user){
-            $lastContentnDate [] = $messageManager->getLastMessageById($user->getId(), $idUser);
-        }
+        $lastContentnDate = $messageManager->getThreads($users, $idUser);
+
         // récupération de l'échange en cours s'il existe
-        $userTalking = NULL;
-        $messages = [];
-        if ($idTwitter!="") {
-            $messages = $messageManager->getMessagesByUser($idTwitter,$idUser);
-            foreach($users as $user) {
-                if ($user->getId() === (int) $idTwitter){
-                    $userTalking = $user;
-                }
-            }
-            $messageManager->setOpenMessageToZero($idTwitter, $idUser);
-        }
+        $messages = $messageManager->getCurrentMessage($idTwitter, $idUser);
+        $userTalking = $messageManager->getCurrentUser($idTwitter);
+
+        
         $view = new View("Messagerie");
         $view->render("message", [
             'idUser' => $idUser, 
@@ -43,7 +35,10 @@ class MessageController {
             'messages' => $messages, 
             'lastContentnDate' => $lastContentnDate]);
     }
-
+    /**
+     * ajout d'un message 
+     * @return void
+     */
     public function addMessage() : void
     {
         // On vérifie que l'utilisateur est connecté.
@@ -64,7 +59,11 @@ class MessageController {
 
         $this->showMessagePage();
     }
-
+    /**
+     * affichage de la page de messagerie depuis les autres pages du site
+     * single book et account
+     * @return void
+     */
     public function sendMessageFromSingleBook() : void {
         // On vérifie que l'utilisateur est connecté.
         $owner = new AdminController;
@@ -76,19 +75,12 @@ class MessageController {
         //récupération des échanges
         $messageManager = new MessageManager ;
         $users = $messageManager->getAllUsersTalkingWith($idUser);
-        foreach ($users as $user){
-            $lastContentnDate [] = $messageManager->getLastMessageById($user->getId(), $idUser);
-        }
+        $lastContentnDate = $messageManager->getThreads($users, $idUser);
+
         // récupération de l'échange en cours s'il existe
-        $userTalking = NULL;
-        $messages = [];
-        if ($idTwitter!="") {
-            $messages = $messageManager->getMessagesByUser($idTwitter,$idUser);
-            $userTalking = new User();
-            $userTalking->setId((int) $idTwitter);
-            
-            $messageManager->setOpenMessageToZero($idTwitter, $idUser);
-        }
+        $messages = $messageManager->getCurrentMessage($idTwitter, $idUser);
+        $userTalking = $messageManager->getCurrentUser($idTwitter);
+
         $view = new View("Messagerie");
         $view->render("message", [
             'idUser' => $idUser, 

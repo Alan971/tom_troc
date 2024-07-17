@@ -13,6 +13,7 @@ class MessageManager extends AbstractEntityManager
     {
         $sql = "SELECT id_From, id_To FROM message WHERE id_From =:id OR id_To = :id 
         GROUP BY id_From, id_To ORDER BY date ASC";
+
         $result = $this->db->query($sql, ['id' => $idUser]);
         while ($idUsers = $result->fetch()) {
             if(!empty($idUsers['id_From'])) {
@@ -37,9 +38,8 @@ class MessageManager extends AbstractEntityManager
      */
     public function getLastMessageById($idTwitter, $id) : ?array
     {
-
-
         $sql = "SELECT content, date, open_message FROM message WHERE id_from = :idTwitter AND id_To = :id ORDER BY date DESC LIMIT 1";
+       
         $result = $this->db->query($sql, ['idTwitter' => $idTwitter, 'id' => $id]); 
         $lastMessage = $result->fetch();
         if (isset($lastMessage['date'])){
@@ -161,7 +161,7 @@ class MessageManager extends AbstractEntityManager
         $result->fetchAll();
     }
     /**
-    * compte le nombre de messages non lus
+    * ajoute un nouveau message dans la base
     * @param  Message $message
     * @return bool
     */
@@ -175,7 +175,11 @@ class MessageManager extends AbstractEntityManager
         return $result->rowCount() > 0;
 
     }
-
+    /**
+    * mise en forme de la date des messages
+    * @param  string $date
+    * @return string
+    */
     public function setDateMessageToGoodFormat(string $date) : string 
     {
         // set last year date
@@ -192,6 +196,11 @@ class MessageManager extends AbstractEntityManager
         }
         
     }
+    /**
+    * mise en forme de la date des threads
+    * @param  string $date
+    * @return string
+    */
     public function setDateThreadToGoodFormat(string $date) : string 
     {
         // set last year date
@@ -207,5 +216,48 @@ class MessageManager extends AbstractEntityManager
         else {
             return date('d.m', strtotime($date));
         }
+    }
+    /**
+    * récupération des échanges
+    * @param  array $users 
+    * @param int $idUser
+    * @return array
+    */
+    public function getThreads(array $users, int $idUser) : array {
+        foreach ($users as $user){
+            $lastContentnDate [] = $this->getLastMessageById($user->getId(), $idUser);
+        }
+        return $lastContentnDate;
+    }
+    /**
+    * récupérer l'échange en cours s'il existe ou l'id utilisateur
+    * et indiquer message comme lu
+    * @param  string $idUser 
+    * @param string $idTwitter
+    * @return array
+    */
+    public function getCurrentMessage($idTwitter, $idUser) : array {
+        $messages = [];
+        if ($idTwitter!="") {
+            $messages = $this->getMessagesByUser($idTwitter,$idUser);
+
+            $this->setOpenMessageToZero($idTwitter, $idUser);
+        }
+        return $messages;
+
+    }
+    /**
+    * récupérer l'échange en cours s'il existe ou l'id utilisateur
+    * et indiquer message comme lu
+    * @param string $idTwitter
+    * @return User
+    */
+    public function getCurrentUser($idTwitter) : ?User {
+        $userTalking = NULL;
+        if ($idTwitter!="") {
+            $userTalking = new User();
+            $userTalking->setId((int) $idTwitter);
+        }
+        return $userTalking;
     }
 }

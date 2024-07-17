@@ -127,5 +127,20 @@ class UserManager extends AbstractEntityManager
         return $sinceDate;
     }
 
+     /**
+     * remplacement de l'icon de l'utilisateur.
+     * @param int $idUser
+     * @param string $path
+     * @return bool
+     */  
+    public function setIcon($idUser, $path) :bool {
+        $sql = "UPDATE users SET icon = :icon WHERE id = :id";
+        $result = $this->db->query($sql, [
+            'icon' => $path,
+            'id' => $idUser
+        ]); 
+        return $result->rowCount() > 0;
+    }
+
 }
 
