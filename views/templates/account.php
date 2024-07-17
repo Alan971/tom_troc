@@ -16,7 +16,7 @@
             <img src="<?=$me->getIcon()?>" alt="">
             <? if ($me->getId()===$_SESSION['idUser']) : ?>
                 <? if($InputIcon === "") : ?>
-                    <a id="modifyIcon" href="index.php?action=modifyUserIcon&InputIcon=1">modifier</a>
+                    <a id="modifyIcon" href="index.php?action=modifyUserIcon&InputIcon=1">Modifier</a>
                 <?elseif($InputIcon ==="1") :?>
                     <form  id="selectFile" method="POST" action="index.php?action=uploadIcon" enctype="multipart/form-data" >
                         <label for="imageUpload" title="Cherchez le fichier à uploader"><?=$errorTxt?></label>

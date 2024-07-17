@@ -11,11 +11,19 @@
         <div id="modifyPageLeft">
             <p>Photo</p>
             <?if($book->getImage()==="") :?>
-                <img src="img/photopardefaut.png" alt="<?=$book->getImage()?>">
-                <a href="#">Modifier la photo par défaut</a>
+                <img src="img/tomtroc/photopardefaut.png" alt="<?=$book->getImage()?>">
             <?else :?>
                 <img src="<?=$book->getImage()?>" alt="<?=$book->getImage()?>">
-                <a href="#">Modifier la photo</a>
+                <? if($InputIcon === "") : ?>
+                    <a id="modifyIcon" href="index.php?action=modifyBookImage&id=<?=$book->getId()?>&InputIcon=1">Modifier la photo</a>
+                <?elseif($InputIcon ==="1") :?>
+                    <form  id="selectFile" method="POST" action="index.php?action=uploadBookImage&id=&id=<?=$book->getId()?>" enctype="multipart/form-data" >
+                        <label for="imageUpload" title="Cherchez le fichier à uploader"><?=$errorTxt?></label>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
+                        <input id = "imageUpload" type = "file" name = "imageUpload" />
+                        <input id = "registerButton" name = "submit" type = "submit" value = "Enregistrer" />
+                    </form>
+                <? endif;?>
             <?endif;?>
             
             

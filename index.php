@@ -85,7 +85,20 @@ try {
         case 'doAddBook' :
             $bookController = new BookController();
             $bookController->doAddBook();
-            break;           
+            break;
+        case 'uploadBookImage' :
+            $bookController = new BookController();
+            $bookController->askforBookImage();
+            break;
+        case 'modifyBookImage' :
+            $bookController = new BookController();
+            $bookController->showModifyBook();
+            break;
+        case 'addBookImage' :
+            $bookController = new BookController();
+            $bookController->showAddBook();
+            break;     
+        //message      
         case 'Message' :
             $messageController = new MessageController();
             $messageController->showMessagePage();

@@ -50,7 +50,6 @@ class UploadImg {
 	    if(@file_exists($file)) {
 	        $fileInfo = pathinfo($file);
 	        if(@unlink($file)) {
-	            $txt = "Fichier : ".$fileInfo['basename']." effac&eacute; .";
                 return true;
 	        }
             return false;
@@ -72,7 +71,6 @@ class UploadImg {
             // suppression de l'ancien fichier
             if($this->deleteFile($owner->getIcon())) {
                 // modif bdd
-                $user = new UserManager();
                 if($user->setIcon($idUser, $fullPath)) {
                     return "";
                 }
@@ -83,5 +81,32 @@ class UploadImg {
         }
         return "une erreur est survenue";
     }
+        /**
+     * creation et remplacement de l'icon de l'utilisateur.
+     * @param string
+     * @return bool
+     */
+    public function setBookImage($postImgRub, $path, $idBook) : string {
+
+        $bookManager = new BookManager();
+        $book = $bookManager->getBookById($idBook);
+        // chargement de la nouvelle image
+        if($fullPath = $this->uploadImage($postImgRub, $path)) {
+            // suppression de l'ancien fichier
+            if($this->deleteFile($book->getImage())) {
+                // modif bdd
+                var_dump($fullPath);
+                var_dump($book->getImage());
+                if($bookManager->setBookImage($idBook, $fullPath)) {
+                    return "";
+                }
+            }
+            else {
+                $this->deleteFile($fullPath);
+            }
+        }
+        return "une erreur est survenue";
+    }
+    
 }
 

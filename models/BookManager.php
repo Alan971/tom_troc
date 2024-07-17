@@ -155,4 +155,19 @@ class BookManager extends AbstractEntityManager{
         return $result->rowCount() > 0;
     }
 
+    /**
+     * ajout d'une image pour le livre.
+     * @param int $idBook
+     * @param string $path
+     * @return bool
+     */  
+    public function setBookImage($idBook, $path) :bool {
+        $sql = "UPDATE books SET image = :image WHERE id = :id";
+        $result = $this->db->query($sql, [
+            'image' => $path,
+            'id' => $idBook
+        ]); 
+        return $result->rowCount() > 0;
+    }
+
 }

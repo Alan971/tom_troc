@@ -2,6 +2,7 @@
 
 class BookController {
 
+    private string $errorTxt="";
     /**
      * Accès à la page d'accueil
      * @param 
@@ -91,11 +92,15 @@ class BookController {
         // On vérifie que l'utilisateur est connecté.
         $owner = new AdminController;
         $owner->checkIfUserIsConnected();
-        
+        if (empty($this->errorTxt)) {
+            $inputIcon = Utils::request("InputIcon", "");
+        }
+        else {
+            $inputIcon = "1";
+        }
         // Récupération de l'id du livre demandé.
         $id = Utils::request("id", -1);
         $idUser = $_SESSION['idUser'];
-
         $bookManager = new BookManager();
         $book = $bookManager->getBookById($id);
 
@@ -104,7 +109,11 @@ class BookController {
             throw new Exception("Vous n'êtes pas autorisé a accéder à ce livre");
         }
         $view = new View($book->getTitle());
-        $view->render("modifybook", ['book' => $book]);
+        $view->render("modifybook", [
+        'book' => $book, 
+        'InputIcon' => $inputIcon,
+        'errorTxt' => $this->errorTxt
+    ]);
     }
 
     /**
@@ -155,7 +164,9 @@ class BookController {
         $book = new Book();
 
         $view = new View("Nouveau livre");
-        $view->render("modifybook", ['book' => $book]);
+        $view->render("modifybook", [
+            'book' => $book
+        ]);
     }
     /**
      * ajout de livre
@@ -188,5 +199,21 @@ class BookController {
         else { 
             throw new Exception("Une erreur est survenue : l'enregistrement n'a par été réalisé");
         }
+    }
+
+    /**
+     * modification de l'image du livre.
+     * @return void
+     */
+    public function askforBookImage() : void {
+
+        $idUser= $_SESSION['idUser'];
+        $idBook = Utils::request("id", -1);
+
+       //téléchargement sur le serveur
+        $uploadIcon = new UploadImg();
+        $this->errorTxt = $uploadIcon->setBookImage("imageUpload", "img/", $idBook);
+
+        $this->showModifyBook();
     }
 }
