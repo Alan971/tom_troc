@@ -3,6 +3,9 @@
         <h2>Messagerie</h2> 
         <?php
         $i=0;
+        if(!isset($users)) :?>
+            <p>Pas de message</p>
+        <? else : 
         foreach($users as $user){
             if($userTalking!==null) :
                 if($user->getId() === $userTalking->getId()) : ?>
@@ -29,7 +32,7 @@
         <?
         $i++;
         }
-        ?>
+    endif; ?>
     </div>
     <div id="conversation">
         <div id="showThread">
@@ -38,7 +41,7 @@
                 foreach($messages as $message){
                     if($message->getidTo() === $idUser) :?>
                         <div class = "blocDate">
-                            <img src=" <?= $userTalking->getIcon() ?> " >
+                            <img src="<?= $userTalking->getIcon()?>" alt="Icone">
                             <p class = "leftPositionMessageDate">
                                 <?=$message->getDateViewable() ?>
                             </p> 
@@ -61,6 +64,7 @@
         </div>
         <? if(isset($userTalking)) :?>
         <form id="sendMessageForm" action="index.php?action=addMessage&idTwitter=<?=$userTalking->getId()?>" method="POST">
+            <label for="newMessage" hidden>tapez votre message ici</label>
             <input type="text" name="newMessage" id="newMessage" placeholder="tapez votre message ici" autocomplete="off">
             <button>Envoyer</button>
         </form>

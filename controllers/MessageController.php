@@ -88,6 +88,7 @@ class MessageController {
             'users' => $users , 
             'messages' => $messages, 
             'lastContentnDate' => $lastContentnDate]);
+        
     }
 
 }

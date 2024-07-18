@@ -41,7 +41,11 @@ class BookController {
     public function showSingleBook() :void {
         // Récupération de l'id du livre demandé.
         $id = Utils::request("id", -1);
-        $idUser = $_SESSION['idUser'];
+        $idUser = "-1";
+        if(isset($_SESSION['idUser'])) {
+            $idUser = $_SESSION['idUser'];
+        }
+        
 
         $bookManager = new BookManager();
         $book = $bookManager->getBookById($id);
@@ -51,7 +55,11 @@ class BookController {
         $owner = $bookOwner->getUserById($book->getidUser());
 
         $view = new View($book->getTitle());
-        $view->render("singleBook", ['book' => $book, 'owner' => $owner, 'idUser' => $idUser]);
+        $view->render("singleBook", [
+            'book' => $book, 
+            'owner' => $owner, 
+            'idUser' => $idUser,
+        ]);
     }
 
     /**
@@ -147,7 +155,11 @@ class BookController {
             $book = $bookManager->getBookById($id);
             
             $view = new View($book->getTitle());
-            $view->render("modifybook", ['book' => $book, 'error' => "Enregistrement non réalisé"]);
+            $view->render("modifybook", [
+                'book' => $book, 
+                'error' => "Enregistrement non réalisé",
+                'InputIcon' => ""
+            ]);
         }
     }
     /**
@@ -165,7 +177,8 @@ class BookController {
 
         $view = new View("Nouveau livre");
         $view->render("modifybook", [
-            'book' => $book
+            'book' => $book,
+            'InputIcon' => ""
         ]);
     }
     /**
@@ -181,7 +194,7 @@ class BookController {
         $author = Utils::request("author");
         $comment = Utils::request("comment");
         $exchange = Utils::request("exchange");
-        $image = Utils::request("image", "img/imagepardefaut.png");
+        $image = Utils::request("image", "");
 
         $newBook = new Book();
         $newBook->setidUser($idUser);

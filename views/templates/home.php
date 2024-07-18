@@ -8,7 +8,7 @@
         <a class="linkGreen" href="index.php?action=library">Découvrir</a>
     </div>
     <div id="imageAccueil">
-        <img src="img/tomtroc/hamza-nouasria-KXrvPthkmYQ-unsplash 1.png" alt="">
+        <img src="img/tomtroc/hamza-nouasria-KXrvPthkmYQ-unsplash1.png" alt="">
         <p class="author">Hamza</p>
     </div>
 </div>
@@ -31,9 +31,9 @@
 </div>
 <div id="homePartThree">
     <h2>Comment ça marche ?</h2>
-    <span>
+    <p id="HowItWork">
         Echanger des livres avec TomTroc c'est simple et amusant ! Suivez ces étapes pour commencer :
-    </span>
+    </p>
     <ul>
         <li>Inscrivez-vous gratuitement sur notre plateforme.</li>
         <li>Ajoutez les livres que vous souhaitez échanger à votre profil.</li>

@@ -95,8 +95,6 @@ class UploadImg {
             // suppression de l'ancien fichier
             if($this->deleteFile($book->getImage())) {
                 // modif bdd
-                var_dump($fullPath);
-                var_dump($book->getImage());
                 if($bookManager->setBookImage($idBook, $fullPath)) {
                     return "";
                 }

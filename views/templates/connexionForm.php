@@ -12,5 +12,5 @@
         </form>
         <div class="changeChoice"><p>Pas de compte ?</p><a href="index.php?action=inscription">Inscrivez-vous</a></div>
     </div>
-    <img src="img/tomtroc/Mask group1.png">
+    <img src="img/tomtroc/Maskgroup1.png" alt="image Masque" >
 </div>

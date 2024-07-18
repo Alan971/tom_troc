@@ -21,12 +21,16 @@ class MessageManager extends AbstractEntityManager
                 $listId [] = $idUsers['id_To'];
             }
         }
-        $listId = array_unique($listId);
-        $manager = new UserManager();
-        foreach($listId as $idTalkingUser) 
-        {
-            if($idTalkingUser != $idUser) {
-                $users [] = $manager->getUserById($idTalkingUser);
+        $users = Null;
+        if (isset($listId)){
+            $listId = array_unique($listId);
+
+            $manager = new UserManager();
+            foreach($listId as $idTalkingUser) 
+            {
+                if($idTalkingUser != $idUser) {
+                    $users [] = $manager->getUserById($idTalkingUser);
+                }
             }
         }
         return $users;
@@ -139,13 +143,15 @@ class MessageManager extends AbstractEntityManager
      */
     public function countNewMessages($id) : string {
         if(isset($id)){
-            $sql = "SELECT SUM(open_message) AS nb FROM message WHERE id_To = :id";
-            $result = $this->db->query($sql, ['id' => $id]);
-            $tab = $result->fetch();
-            if($tab['nb'] === "0") { 
-                return "";
+            if( $id != "-1") {
+                $sql = "SELECT SUM(open_message) AS nb FROM message WHERE id_To = :id";
+                $result = $this->db->query($sql, ['id' => $id]);
+                $tab = $result->fetch();
+                if($tab['nb'] === "0" || $tab['nb'] === NULL) { 
+                    return "";
+                }
+                return $tab['nb'];
             }
-            return $tab['nb'];
         }
         return "";
     }
@@ -201,15 +207,13 @@ class MessageManager extends AbstractEntityManager
     * @param  string $date
     * @return string
     */
-    public function setDateThreadToGoodFormat(string $date) : string 
-    {
+    public function setDateThreadToGoodFormat(string $date) : string  {
         // set last year date
         if (date('Y') - date('Y', strtotime($date)) > 0){
             return date('d.m.Y', $date);
         }
         // set today date
         elseif (date('m') === date('m', strtotime($date)) && date('d') === date('d', strtotime($date))) {
-            var_dump(date('H:i', strtotime($date)));
             return date('H:i', strtotime($date));
         }
         // set last day date
@@ -223,9 +227,12 @@ class MessageManager extends AbstractEntityManager
     * @param int $idUser
     * @return array
     */
-    public function getThreads(array $users, int $idUser) : array {
-        foreach ($users as $user){
-            $lastContentnDate [] = $this->getLastMessageById($user->getId(), $idUser);
+    public function getThreads(?array $users, int $idUser) : ?array {
+        $lastContentnDate = NULL;
+        if($users) {
+            foreach ($users as $user){
+                $lastContentnDate [] = $this->getLastMessageById($user->getId(), $idUser);
+            }
         }
         return $lastContentnDate;
     }
@@ -255,8 +262,8 @@ class MessageManager extends AbstractEntityManager
     public function getCurrentUser($idTwitter) : ?User {
         $userTalking = NULL;
         if ($idTwitter!="") {
-            $userTalking = new User();
-            $userTalking->setId((int) $idTwitter);
+            $getUser = new UserManager();
+            $userTalking = $getUser->getUserById($idTwitter);
         }
         return $userTalking;
     }

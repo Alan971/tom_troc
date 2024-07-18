@@ -107,7 +107,8 @@ class BookManager extends AbstractEntityManager{
         // suppression des images
         $book = $this->getBookById($id);
         $pathname = $book->getImage();
-        unlink($pathname);
+        $deleteFile = new UploadImg();
+        $deleteFile->deleteFile($pathname);
         // suppression en bdd
         $sql = "DELETE FROM books WHERE id =:id";
         $result = $this->db->query($sql, ['id' => $id]);

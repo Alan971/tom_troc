@@ -8,8 +8,12 @@
  *      $nbMessage string : nombre de message non lu
  */
 $action = Utils::request('action', '');
-$messageManager = new MessageManager();
-$nbMessages = $messageManager->countNewMessages($_SESSION['idUser']);
+
+$nbMessages = "";
+if(isset($_SESSION['idUser'])){
+    $messageManager = new MessageManager();
+    $nbMessages = $messageManager->countNewMessages($_SESSION['idUser']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,7 +37,7 @@ $nbMessages = $messageManager->countNewMessages($_SESSION['idUser']);
         <div class="divHeaderLeft"> 
             <svg width="51" height="51" class="d-block" role="img" focusable="false">
                 <title>Tom Troc</title>
-                <rect width="51" height="51" cx="0" cy="0" rx="15" ry="15" fill="#00AC66"/>
+                <rect width="51" height="51" x="0" y="0" rx="15" ry="15" fill="#00AC66"/>
                 <text x="8" y="30" font-family="Playfair Display" font-size="27" fill="white" stroke="white" stroke-width="2">
                     T
                 </text>
@@ -77,7 +81,7 @@ $nbMessages = $messageManager->countNewMessages($_SESSION['idUser']);
         </nav>
         <svg width="51" height="51" class="d-block" role="img" focusable="false">
                 <title>Tom Troc</title>
-                <rect width="51" height="51" cx="0" cy="0" rx="15" ry="15" fill="white"/>
+                <rect width="51" height="51" x="0" y="0" rx="15" ry="15" fill="white"/>
                 <text x="8" y="30" font-family="Playfair Display" font-size="27" fill="#00AC66" stroke="#00AC66" stroke-width="2">
                     T
                 </text>

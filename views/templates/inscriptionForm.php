@@ -13,7 +13,6 @@
             </div>
         </form>
         <div class="changeChoice"><p>Déjà inscrit ?</p><a href="index.php?action=connexion">Connectez-vous</a></div>
-        
     </div>
-    <img src="img/tomtroc/Mask group1.png">
+    <img src="img/tomtroc/Maskgroup1.png" alt="image Masque">
 </div>

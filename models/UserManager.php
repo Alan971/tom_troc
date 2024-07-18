@@ -104,7 +104,7 @@ class UserManager extends AbstractEntityManager
     }
      /**
      * gestion de l'affichage du temps.
-     * @param string $dateCreation
+     * @param ?string $dateCreation
      * @return string
      */   
     public function timing ($dateCreation) : string
@@ -117,13 +117,12 @@ class UserManager extends AbstractEntityManager
         } elseif ($tNow[1]-$tDate[1]>0) {
             $sinceDate = $tNow[1]-$tDate[1];
             $sinceDate = $sinceDate . " mois";
-        }elseif($tNow[2]-$tDate[2]>0) {
+        }elseif($tNow[2]-$tDate[2]>1) {
             $sinceDate = $tNow[2]-$tDate[2];
             $sinceDate = $sinceDate . " jours";
         } else {
-            $sinceDate ="peu";
+            $sinceDate ="aujourd'hui, <br><b>Bienvenue !</b>";
         }
-
         return $sinceDate;
     }
 

@@ -4,7 +4,7 @@
         <a href="index.php?action=library">Nos livres > <?=$book->getTitle()?></a>
     </div>
     <div id = "singleBookDescription">
-        <img src="<?=$book->getImage()?>" alt="<?=$book->getTitle?>">
+        <img src="<?= $book->getImage() != "" ? $book->getImage() :"img/tomtroc/defaut.png" ?>" alt="Image du livre">
         <div id = "description">
             <div id="titleSingleBook">
                 <h2><?=$book->getTitle()?></h2>
@@ -19,12 +19,12 @@
                 <h4>PROPRIETAIRE</h4>
                 <? if($idUser === $book->getidUser()) :?>
                     <a id="owner" href="#">
-                        <img src="<?=$owner->getIcon()?>" alt="">
+                        <img src="<?=$owner->getIcon()?>" alt="Icone">
                         <p><?=$owner->getPseudo()?></p>
                     </a>
                 <? else :?>
                     <a id="owner" href="index.php?action=account&idUser=<?=$book->getidUser()?>">
-                        <img src="<?=$owner->getIcon()?>" alt="">
+                        <img src="<?=$owner->getIcon()?>" alt="Icone">
                         <span><?=$owner->getPseudo()?></span>
                     </a>
                     <a id="sendMessage" href="index.php?action=MessageFromSBorAcc&idBookOwner=<?=$book->getidUser()?>">

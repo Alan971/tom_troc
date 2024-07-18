@@ -16,6 +16,7 @@ class AdminController {
         // On vérifie que l'utilisateur est connecté.
         if (!isset($_SESSION['user'])) {
             $this->displayConnectionForm();
+            exit;
         }
     }
 
@@ -111,13 +112,13 @@ class AdminController {
         {
             throw new Exception("Le compte n'a pas été créé.");
         }
-
+        $user = $userManager->getUserByEmail($email);
         // On connecte l'utilisateur.
         $_SESSION['user'] = $user;
         $_SESSION['idUser'] = $user->getId();
 
         // On redirige vers la page de compte.
-        Utils::redirect("account");
+        $this->showMyAccount();
 
     }
 
@@ -140,8 +141,7 @@ class AdminController {
     public function showMyAccount() :void
     {
         // On vérifie que l'utilisateur est connecté.
-        $this->checkIfUserIsConnected();
-        
+        $this->checkIfUserIsConnected();    
         $idUser = $_SESSION['idUser'];
         if (empty($this->errorTxt)) {
             $inputIcon = Utils::request("InputIcon", "");
@@ -149,7 +149,6 @@ class AdminController {
         else {
             $inputIcon = "1";
         }
-        
         $user = new UserManager;
         $me = $user->getUserById($idUser);
         $time = $user->timing($me->getcreationDate());   
@@ -193,7 +192,8 @@ class AdminController {
             'me' => $me, 
             'mybooks' => $mybooks, 
             'time' =>  $time, 
-            'errorTxt' => $this->errorTxt
+            'errorTxt' => $this->errorTxt,
+            'InputIcon' => ""
         ]);
     }
 
@@ -249,7 +249,8 @@ class AdminController {
             'mybooks' => $mybooks, 
             'time' =>  $time, 
             'isvalid' => $isvalid,  
-            'errorTxt' => $this->errorTxt
+            'errorTxt' => $this->errorTxt,
+            'InputIcon' => ""
         ]);
     }
    

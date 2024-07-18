@@ -80,14 +80,13 @@
     align-items: center;
     padding: 40px;
 }
-#homePartThree span {
+#HowItWork {
     width: 35%;
     padding:10px;
     font-size: 16px;
     font-weight: 300;
     line-height: 19.36px;
     text-align: center;
-
 }
 #homePartThree ul {
     width: 70%;
@@ -99,6 +98,7 @@
     width: 21%;
     height: auto;
     background-color: var(--backgroundPaleColor);
+    border-radius: 10px;
     margin-top: 20px;
     margin-left: 4%;
     padding: 10px;
@@ -128,7 +128,7 @@
 
 #valeurEtSigle{
     width: 35%;
-    height: 300px;
+    height: 400px;
     position: relative;
     margin-bottom: 100px;
 }
@@ -152,12 +152,13 @@
 #valeurEtSigle .author {
     text-align: start;
     position: absolute;
+    padding-top: 20px;
     bottom: 5px;
     left: 0;
 }
 
 .Cards { 
-    width: 71%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content:flex-start;
@@ -201,7 +202,7 @@
 
 /* page library.php */
 #library {
-   width: 100%; 
+   width: 70%; 
    min-height: 600px;
    display: flex;
    flex-direction: column;
@@ -211,7 +212,7 @@
 }
 
 #titleSearchLibrary {
-    width: 70%;
+    width: 100%;
     height: auto;
     display: flex;
     flex-direction: row;
@@ -278,8 +279,10 @@
     font-size: 10px;
     font-weight: 300;
     color: var(--hamzaColor);
-
     padding-bottom: 20px;
+}
+.linkBack a:hover, #linkBacknTitle a:hover {
+    font-weight: 500;
 }
 #singleBookRecap {
     width: 80%;
@@ -310,7 +313,6 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    align-items: left;
 }
 #modifyPageLeft p, #modifyPageRight label {
     font-size: 10px;
@@ -430,7 +432,6 @@
     width: 50px;
     height: 50px;
     border-radius: 30px;
-    margin-left: 10px;   
 }
 #owner p{
     color :var(--h2Color);
@@ -438,6 +439,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 16.94px;
+    padding-left: 10px;
 }
 #sendMessage {
     background-color: var(--defaultGreenColor);
@@ -728,12 +730,12 @@ label{
 .red {
     background-color: var(--tagColor);
 }
-#supprBook {
+.supprBook {
     padding: 5px;
     color: var(--tagColor);
     text-decoration: underline;
 }
-#modifyBook {
+.modifyBook {
     padding: 5px;
     text-decoration: underline;
 }

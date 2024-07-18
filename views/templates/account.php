@@ -1,3 +1,6 @@
+<?if(!isset($_SESSION['idUser'])) {
+    $_SESSION['idUser'] ="-1";
+    }?>
 <? if ($me->getId()===$_SESSION['idUser']) : ?>
 <div id="myAccount">
     <div id="title">
@@ -15,15 +18,15 @@
     <?endif;?>
             <img src="<?=$me->getIcon()?>" alt="">
             <? if ($me->getId()===$_SESSION['idUser']) : ?>
-                <? if($InputIcon === "") : ?>
-                    <a id="modifyIcon" href="index.php?action=modifyUserIcon&InputIcon=1">Modifier</a>
-                <?elseif($InputIcon ==="1") :?>
+                <? if($InputIcon ==="1") :?>
                     <form  id="selectFile" method="POST" action="index.php?action=uploadIcon" enctype="multipart/form-data" >
                         <label for="imageUpload" title="Cherchez le fichier à uploader"><?=$errorTxt?></label>
                         <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
                         <input id = "imageUpload" type = "file" name = "imageUpload" />
                         <input id = "registerButton" name = "submit" type = "submit" value = "Enregistrer" />
                     </form>
+                <? else : ?>
+                    <a id="modifyIcon" href="index.php?action=modifyUserIcon&InputIcon=1">Modifier</a>
                 <? endif;?>
             <?endif;?>
             <p id="pseudoName"><?=$me->getPseudo()?></p>
@@ -97,7 +100,7 @@
             ?>
                 <? if ($me->getId()===$_SESSION['idUser']) : ?>
                 <div class = "tableRow flag<?=($i%2)?>">
-                    <img src="<?=$book->getImage()?>" alt="<?=$book->getTitle()?>">
+                    <img src="<?= $book->getImage()  ? $book->getImage() : "img/tomtroc/defaut.png";?>" alt="image du livre">
                     <p>
                         <?=$book->getTitle()?>
                     </p>
@@ -129,8 +132,8 @@
                         <span class = 'red dispo'>non dispo.</span>
                     <?endif;?>
                     <p>
-                        <a id="modifyBook" href="index.php?action=modifyBook&id=<?=$book->getId()?>">Editer</a>
-                        <a id="supprBook" href="index.php?action=supprBook&id=<?=$book->getId()?>">Supprimer</a>
+                        <a class="modifyBook" href="index.php?action=modifyBook&id=<?=$book->getId()?>">Editer</a>
+                        <a class="supprBook" href="index.php?action=supprBook&id=<?=$book->getId()?>">Supprimer</a>
                     </p>
                 <?endif;?>
                 </div>
