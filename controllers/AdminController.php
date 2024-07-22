@@ -47,8 +47,8 @@ class AdminController {
     public function connectUser() : void 
     {
         // On récupère les données du formulaire.
-        $email = Utils::request("email");
-        $password = Utils::request("password");
+        $email = Utils::format(Utils::request("email"));
+        $password = Utils::format(Utils::request("password"));
 
         // On vérifie que les données sont valides.
         if (empty($email) || empty($password)) {
@@ -82,9 +82,9 @@ class AdminController {
     public function createUser() : void 
     {
         // On récupère les données du formulaire.
-        $pseudo = Utils::request("pseudo");
-        $email = Utils::request("email");
-        $password = Utils::request("password");
+        $pseudo = Utils::format(Utils::request("pseudo"));
+        $email = Utils::format(Utils::request("email"));
+        $password = Utils::format(Utils::request("password"));
         // On vérifie que les données sont valides.
         if (empty($email) || empty($password) || empty($pseudo)) {
             throw new Exception("Tous les champs sont obligatoires.");
@@ -207,9 +207,9 @@ class AdminController {
         $this->checkIfUserIsConnected();
 
         $idUser = $_SESSION['idUser'];
-        $pseudo = Utils::request("pseudo");
-        $email = Utils::request("email");
-        $password = Utils::request("password");
+        $pseudo = Utils::format(Utils::request("pseudo"));
+        $email = Utils::format(Utils::request("email"));
+        $password = Utils::format(Utils::request("password"));
         
         //contrôle des éléments à modifier
         $isvalid = "Il faut renseigner tous les champs";

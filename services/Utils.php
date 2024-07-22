@@ -51,26 +51,27 @@ class Utils {
 
     /**
      * Cette méthode protège une chaine de caractères contre les attaques XSS.
-     * De plus, elle transforme les retours à la ligne en balises <p> pour un affichage plus agréable. 
-     * @param string $string : la chaine à protéger.
+     * @param ?string $string : la chaine à protéger.
      * @return string : la chaine protégée.
      */
-    public static function format(string $string) : string
+    public static function format(?string $string) : ?string
     {
+        if(!isset($string)){
+            return null;
+        }
         // Etape 1, on protège le texte avec htmlspecialchars.
         $finalString = htmlspecialchars($string, ENT_QUOTES);
 
         // Etape 2, le texte va être découpé par rapport aux retours à la ligne, 
         $lines = explode("\n", $finalString);
 
-        // On reconstruit en mettant chaque ligne dans un paragraphe (et en sautant les lignes vides).
+        // On reconstruit  en sautant les lignes vides.
         $finalString = "";
         foreach ($lines as $line) {
             if (trim($line) != "") {
-                $finalString .= "<p>$line</p>";
+                $finalString .= $line;
             }
         }
-        
         return $finalString;
     }
 

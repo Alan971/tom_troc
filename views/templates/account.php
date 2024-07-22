@@ -43,7 +43,7 @@
                         $i++;
                     }
                 ?>
-                 <?=$i?> livres
+                 <?=$i?> livre(s)
             </div>
             <?if($me->getId()!=$_SESSION['idUser']) : ?>
                 <a class="linkGreenBorder messagingButton" href="index.php?action=MessageFromSBorAcc&idBookOwner=<?=$me->getId()?>">

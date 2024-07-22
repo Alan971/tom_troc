@@ -83,7 +83,6 @@ class BookController {
         if($book->getidUser() != $idUser) {
             throw new Exception("Vous n'êtes pas autorisé a accéder à ce livre");
         }
-
         $book = $bookManager->supprBook($id);
 
         // On redirige vers la page de compte.
@@ -133,9 +132,9 @@ class BookController {
     {
         // Récupération des modif du livre demandé.
         $id = Utils::request("id", -1);
-        $title = Utils::request("titleBook");
-        $author = Utils::request("author");
-        $comment = Utils::request("comment");
+        $title = Utils::format(Utils::request("titleBook"));
+        $author = Utils::format(Utils::request("author"));
+        $comment = Utils::format(Utils::request("comment"));
         $exchange = Utils::request("exchange");
 
         $modifiedBook = new Book();
@@ -190,11 +189,11 @@ class BookController {
     {
         // Récupération des ajouts du livre demandé.
         $idUser = $_SESSION['idUser'];
-        $title = Utils::request("titleBook");
-        $author = Utils::request("author");
-        $comment = Utils::request("comment");
+        $title = Utils::format(Utils::request("titleBook"));
+        $author = Utils::format(Utils::request("author"));
+        $comment = Utils::format(Utils::request("comment"));
         $exchange = Utils::request("exchange");
-        $image = Utils::request("image", "");
+        $image = Utils::format(Utils::request("image", ""));
 
         $newBook = new Book();
         $newBook->setidUser($idUser);

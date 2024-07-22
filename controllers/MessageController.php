@@ -47,7 +47,7 @@ class MessageController {
 
         $idUser = $_SESSION['idUser'];
         $idTwitter = Utils::request('idTwitter', "");
-        $newMessage = Utils::request('newMessage', "");
+        $newMessage = Utils::format(Utils::request('newMessage', ""));
 
         $message = new Message();
         $message->setContent($newMessage);
@@ -88,7 +88,5 @@ class MessageController {
             'users' => $users , 
             'messages' => $messages, 
             'lastContentnDate' => $lastContentnDate]);
-        
     }
-
 }
