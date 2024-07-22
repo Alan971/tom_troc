@@ -243,7 +243,7 @@ class MessageManager extends AbstractEntityManager
     * @param string $idTwitter
     * @return array
     */
-    public function getCurrentMessage($idTwitter, $idUser) : array {
+    public function getCurrentMessage($idTwitter, $idUser) : ?array {
         $messages = [];
         if ($idTwitter!="") {
             $messages = $this->getMessagesByUser($idTwitter,$idUser);
