@@ -17,6 +17,7 @@ class UserManager extends AbstractEntityManager
         $result = $this->db->query($sql, ['email' => $email]);
         $user = $result->fetch();
         if ($user) {
+            $user['icon'] = ICON_USER_PATH . $user['icon'];
             return new User($user);
         }
         return null;
@@ -33,6 +34,7 @@ class UserManager extends AbstractEntityManager
         $result = $this->db->query($sql, ['id' => $id]);
         $user = $result->fetch();
         if ($user) {
+            $user['icon'] = ICON_USER_PATH . $user['icon'];
             return new User($user);
         }
         return null;
@@ -132,10 +134,10 @@ class UserManager extends AbstractEntityManager
      * @param string $path
      * @return bool
      */  
-    public function setIcon($idUser, $path) :bool {
+    public function setIcon($idUser, $file) :bool {
         $sql = "UPDATE users SET icon = :icon WHERE id = :id";
         $result = $this->db->query($sql, [
-            'icon' => $path,
+            'icon' => $file,
             'id' => $idUser
         ]); 
         return $result->rowCount() > 0;

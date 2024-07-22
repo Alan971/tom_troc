@@ -224,7 +224,7 @@ class BookController {
 
        //téléchargement sur le serveur
         $uploadIcon = new UploadImg();
-        $this->errorTxt = $uploadIcon->setBookImage("imageUpload", "img/", $idBook);
+        $this->errorTxt = $uploadIcon->setBookImage("imageUpload", BOOK_IMG_PATH, $idBook);
 
         $this->showModifyBook();
     }

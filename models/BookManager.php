@@ -14,6 +14,7 @@ class BookManager extends AbstractEntityManager{
         $result = $this->db->query($sql);
         while ($book = $result->fetch()) {
             if(!empty($book['id'])){
+                $book['image'] = BOOK_IMG_PATH.$book['image'];
                 $bookList[] = new Book($book);
             }
         }
@@ -34,6 +35,7 @@ class BookManager extends AbstractEntityManager{
         $result = $this->db->query($sql, ['id' => $id_user]);
         while ($book = $result->fetch()) {
             if(!empty($book['id'])){
+                $book['image'] = BOOK_IMG_PATH.$book['image'];
                 $bookList[] = new Book($book);
             }
         }
@@ -55,6 +57,7 @@ class BookManager extends AbstractEntityManager{
         $result = $this->db->query($sql, ['id' => $id]);
         $book = $result->fetch();
         if ($book) {
+            $book['image'] = BOOK_IMG_PATH.$book['image'];
             return new Book($book);
         }
         return null;
@@ -88,6 +91,7 @@ class BookManager extends AbstractEntityManager{
         $result = $this->db->query($sql, $params);
         while ($book = $result->fetch()) {
             if(!empty($book['id'])){
+                $book['image'] = BOOK_IMG_PATH.$book['image'];
                 $bookList[] = new Book($book);
             }
         }

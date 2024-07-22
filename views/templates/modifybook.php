@@ -10,8 +10,8 @@
     <div id = "singleBookRecap">
         <div id="modifyPageLeft">
             <p>Photo</p>
-            <?if($book->getImage()==="") :?>
-                <img src="img/tomtroc/defaut.png" alt="image par défaut">
+            <?if($book->getImage() === BOOK_IMG_PATH) :?>
+                <img src=<?=IMG_BOOK_DEFAULT?> alt="image par défaut">
             <?else :?>
                 <img src="<?=$book->getImage()?>" alt="<?=$book->getImage()?>">
             <?endif;?>

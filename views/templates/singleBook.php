@@ -4,7 +4,7 @@
         <a href="index.php?action=library">Nos livres > <?=$book->getTitle()?></a>
     </div>
     <div id = "singleBookDescription">
-        <img src="<?= $book->getImage() != "" ? $book->getImage() :"img/tomtroc/defaut.png" ?>" alt="Image du livre">
+        <img src="<?= $book->getImage() != BOOK_IMG_PATH ? $book->getImage() : IMG_BOOK_DEFAULT ?>" alt="Image du livre">
         <div id = "description">
             <div id="titleSingleBook">
                 <h2><?=$book->getTitle()?></h2>

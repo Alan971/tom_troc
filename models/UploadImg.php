@@ -28,7 +28,7 @@ class UploadImg {
                                 // Parcours du tableau d'erreurs
                                 if(isset($_FILES[$postImgRub]['error']) && UPLOAD_ERR_OK === $_FILES[$postImgRub]['error']) {
                                     if(move_uploaded_file($fileTmp, $path . $imgNameUniq)) {
-                                        return $path . $imgNameUniq;
+                                        return $imgNameUniq;
                                     }
                                 }
                             }
@@ -46,9 +46,7 @@ class UploadImg {
      * @return bool
      */
 	public function deleteFile($file) : bool {
-		$fileInfo = "";
-	    if(@file_exists($file)) {
-	        $fileInfo = pathinfo($file);
+	    if(@file_exists($file) && $file !=BOOK_IMG_PATH && $file != ICON_USER_PATH) {
 	        if(@unlink($file)) {
                 return true;
 	        }
@@ -67,22 +65,22 @@ class UploadImg {
         $user = new UserManager();
         $owner = $user->getUserById($idUser);
         // chargement de la nouvelle image
-        if($fullPath = $this->uploadImage($postImgRub, $path)) {
+        if($iconName = $this->uploadImage($postImgRub, $path)) {
             // suppression de l'ancien fichier
             if($this->deleteFile($owner->getIcon())) {
                 // modif bdd
-                if($user->setIcon($idUser, $fullPath)) {
+                if($user->setIcon($idUser, $iconName)) {
                     return "";
                 }
             }
             else {
-                $this->deleteFile($fullPath);
+                $this->deleteFile(ICON_USER_PATH . $iconName);
             }
         }
         return "une erreur est survenue";
     }
         /**
-     * creation et remplacement de l'icon de l'utilisateur.
+     * creation et remplacement de l'image du livre
      * @param string
      * @return bool
      */
@@ -91,16 +89,16 @@ class UploadImg {
         $bookManager = new BookManager();
         $book = $bookManager->getBookById($idBook);
         // chargement de la nouvelle image
-        if($fullPath = $this->uploadImage($postImgRub, $path)) {
+        if($imageName = $this->uploadImage($postImgRub, $path)) {
             // suppression de l'ancien fichier
             if($this->deleteFile($book->getImage())) {
                 // modif bdd
-                if($bookManager->setBookImage($idBook, $fullPath)) {
+                if($bookManager->setBookImage($idBook, $imageName)) {
                     return "";
                 }
             }
             else {
-                $this->deleteFile($fullPath);
+                $this->deleteFile(BOOK_IMG_PATH . $imageName);
             }
         }
         return "une erreur est survenue";

@@ -100,7 +100,7 @@
             ?>
                 <? if ($me->getId()===$_SESSION['idUser']) : ?>
                 <div class = "tableRow flag<?=($i%2)?>">
-                    <img src="<?= $book->getImage()  ? $book->getImage() : "img/tomtroc/defaut.png";?>" alt="image du livre">
+                    <img src="<?= $book->getImage() != BOOK_IMG_PATH  ? $book->getImage() : "img/tomtroc/defaut.png";?>" alt="image du livre">
                     <p>
                         <?=$book->getTitle()?>
                     </p>

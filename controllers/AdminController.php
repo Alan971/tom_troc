@@ -264,7 +264,7 @@ class AdminController {
 
        //téléchargement sur le serveur
         $uploadIcon = new UploadImg();
-        $this->errorTxt = $uploadIcon->setUserIcon("imageUpload", "img/icon/", $idUser);
+        $this->errorTxt = $uploadIcon->setUserIcon("imageUpload", ICON_USER_PATH, $idUser);
         $this->showMyAccount();
     }
 }
